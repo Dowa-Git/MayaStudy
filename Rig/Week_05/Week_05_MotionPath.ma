@@ -1,6 +1,6 @@
 //Maya ASCII 2018ff09 scene
 //Name: Week_05_MotionPath.ma
-//Last modified: Thu, Jul 21, 2022 02:48:32 AM
+//Last modified: Thu, Jul 21, 2022 03:00:06 AM
 //Codeset: 949
 requires maya "2018ff09";
 requires -nodeType "floatCondition" "lookdevKit" "1.0";
@@ -15,13 +15,13 @@ fileInfo "osv" "Microsoft Windows 8 Business Edition, 64-bit  (Build 9200)\n";
 createNode transform -s -n "persp";
 	rename -uid "9635457D-4511-3A12-CC15-A1A444BF354C";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 53.255943332467808 30.442260023942907 23.093658376823736 ;
-	setAttr ".r" -type "double3" -27.338352724127148 -1013.3999999998191 8.0084894229277967e-15 ;
+	setAttr ".t" -type "double3" 41.517663118908942 27.696034434779001 -1.4851766096788674 ;
+	setAttr ".r" -type "double3" -36.338352724065146 -1350.9999999998472 -1.8224161197363147e-13 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "6780195C-4789-EF7A-C55E-7BAF52A6CEEA";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 67.694309417304083;
+	setAttr ".coi" 50.186709978659728;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -94,119 +94,141 @@ createNode camera -n "leftShape" -p "left";
 	setAttr ".tp" -type "double3" 3.0814879110195774e-33 0 0.055409709377710392 ;
 	setAttr ".hc" -type "string" "viewSet -ls %camera";
 	setAttr ".o" yes;
-createNode transform -n "MotionPath_Locator";
-	rename -uid "C1D27752-4D81-E550-0437-2C8470CF356F";
-createNode transform -n "MotionPath_Loc_01" -p "MotionPath_Locator";
-	rename -uid "60C2B8A9-43F3-EBDE-957A-5B88617BE967";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.448 0.448 0.448 ;
-	setAttr -k on ".UValue";
-createNode locator -n "MotionPath_Loc_0Shape1" -p "MotionPath_Loc_01";
-	rename -uid "901843F3-4741-310C-1065-718378CFC0C9";
+createNode joint -n "MotionPath_Root";
+	rename -uid "D3507399-4365-0D68-75BA-7D92668AE7C0";
+	setAttr ".v" no;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".radi" 0.5;
+createNode joint -n "MotionPath_jnt_01" -p "MotionPath_Root";
+	rename -uid "27C8766A-4528-EBBC-DEE0-6B9C164754EF";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44800000000000001 0 0 0 0 9.9475983006414028e-17 -0.44800000000000001 0
+		 0 0.44800000000000001 9.9475983006414028e-17 0 -4.9960036108132054e-16 -2.792598419361492e-33 11.999999014994707 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode joint -n "MotionPath_jnt_02" -p "MotionPath_Root";
+	rename -uid "72E680BD-4176-8CE9-4EBF-BDBFDF96FD84";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -7.3989094955972589e-16 -5.3442000129575933e-32 9.598636219507318 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode joint -n "MotionPath_jnt_03" -p "MotionPath_Root";
+	rename -uid "E79A04D6-4393-91A7-B759-FFBD82B65EB9";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -1.3427045764738934e-15 -5.4972514044564293e-31 7.1972734261751814 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode joint -n "MotionPath_jnt_04" -p "MotionPath_Root";
+	rename -uid "C92A280C-4AD4-0508-8076-EFA94CAC14AF";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -1.5845040029851748e-15 -2.0422153124848908e-31 4.7959104533049803 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode joint -n "MotionPath_jnt_05" -p "MotionPath_Root";
+	rename -uid "8CB00405-415B-9F89-32AC-129BE1928A10";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -2.0666370410499278e-15 -3.4927916195099874e-31 2.3945478380766105 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode joint -n "MotionPath_jnt_06" -p "MotionPath_Root";
+	rename -uid "51153A59-443F-CB73-B946-D59E90EF5380";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -2.4484458149937563e-15 -3.9731850528845054e-31 -0.0068147772020519231 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode joint -n "MotionPath_jnt_07" -p "MotionPath_Root";
+	rename -uid "E8144BE1-4081-A2EF-CB23-F1A9F70758BC";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -2.6994217513770581e-15 -4.4621254756264529e-31 -2.4081781081425881 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode joint -n "MotionPath_jnt_08" -p "MotionPath_Root";
+	rename -uid "16204511-40EF-6ED8-A8EB-9FA4903BC501";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -3.217906689970217e-15 -5.9043196749220472e-31 -4.8095400077090877 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode joint -n "MotionPath_jnt_09" -p "MotionPath_Root";
+	rename -uid "9BB79147-49D5-CE25-40D7-12B9E74D31E8";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -3.4567688746210689e-15 -9.5195704834461646e-31 -7.2109033384102208 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode joint -n "MotionPath_jnt_10" -p "MotionPath_Root";
+	rename -uid "9C0B18B5-4C58-7E70-365A-FE89A1ED3605";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -4.0326118965228229e-15 -3.8844827939277991e-31 -9.6122652371650474 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode joint -n "MotionPath_jnt_11" -p "MotionPath_Root";
+	rename -uid "710DF80B-40E7-9166-7DDF-72996424DD0F";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".uoc" 1;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -4.246603069191223e-15 -4.3804279371827239e-31 -12.013628569398817 1;
+	setAttr ".radi" 0.7844338062481061;
+createNode transform -n "MotionPath_MDL";
+	rename -uid "9495CF5D-4103-11DB-6C73-EC946A50F8DB";
+createNode transform -n "Cylinder" -p "MotionPath_MDL";
+	rename -uid "B3EAA259-4565-5C1D-6AC7-E5A6BE66092A";
+	setAttr -l on ".tx";
+	setAttr -l on ".ty";
+	setAttr -l on ".tz";
+	setAttr ".r" -type "double3" 90.000000000000028 0 0 ;
+	setAttr -l on ".rx";
+	setAttr -l on ".ry";
+	setAttr -l on ".rz";
+	setAttr -l on ".sx";
+	setAttr -l on ".sy";
+	setAttr -l on ".sz";
+createNode mesh -n "CylinderShape" -p "Cylinder";
+	rename -uid "EECB04B8-4730-8FF6-4111-FDBF73FC6CD6";
 	setAttr -k off ".v";
-createNode transform -n "MotionPath_Loc_02" -p "MotionPath_Locator";
-	rename -uid "10DE2155-4C43-7E8E-46FD-F7BFFCEC930B";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
-	setAttr -k on ".UValue" 0.1;
-createNode locator -n "MotionPath_Loc_0Shape2" -p "MotionPath_Loc_02";
-	rename -uid "2157C815-4B96-712F-4B9E-1DAC2E7EEC9C";
+	setAttr -s 4 ".iog[0].og";
+	setAttr ".vir" yes;
+	setAttr ".vif" yes;
+	setAttr ".uvst[0].uvsn" -type "string" "map1";
+	setAttr ".cuvs" -type "string" "map1";
+	setAttr ".dcc" -type "string" "Ambient+Diffuse";
+	setAttr ".covm[0]"  0 1 1;
+	setAttr ".cdvm[0]"  0 1 1;
+	setAttr ".vcs" 2;
+createNode mesh -n "CylinderShape1Orig" -p "Cylinder";
+	rename -uid "0B183E49-4EA4-6DDF-FA28-17B08F6103AE";
 	setAttr -k off ".v";
-createNode transform -n "MotionPath_Loc_03" -p "MotionPath_Locator";
-	rename -uid "F761C6FE-4B8A-8D9B-76D3-AAB3207858B2";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
-	setAttr -k on ".UValue" 0.2;
-createNode locator -n "MotionPath_Loc_0Shape3" -p "MotionPath_Loc_03";
-	rename -uid "43CD5776-4F24-2345-5C94-3E808148E9F9";
-	setAttr -k off ".v";
-createNode transform -n "MotionPath_Loc_04" -p "MotionPath_Locator";
-	rename -uid "8B9A3473-4C1B-DA30-C2CC-AE9AF0240C00";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
-	setAttr -k on ".UValue" 0.3;
-createNode locator -n "MotionPath_Loc_0Shape4" -p "MotionPath_Loc_04";
-	rename -uid "6CD3C904-4513-41E7-FEB2-C5AD0F03D84A";
-	setAttr -k off ".v";
-createNode transform -n "MotionPath_Loc_05" -p "MotionPath_Locator";
-	rename -uid "2F41EB9A-4891-4362-1CD8-018DD8753441";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
-	setAttr -k on ".UValue" 0.4;
-createNode locator -n "MotionPath_Loc_0Shape5" -p "MotionPath_Loc_05";
-	rename -uid "CC532B16-47A3-7E5C-6049-21B8A04D114C";
-	setAttr -k off ".v";
-createNode transform -n "MotionPath_Loc_06" -p "MotionPath_Locator";
-	rename -uid "E58AB2A4-4B11-AD2D-60B6-449B4FEDBA55";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
-	setAttr -k on ".UValue" 0.5;
-createNode locator -n "MotionPath_Loc_0Shape6" -p "MotionPath_Loc_06";
-	rename -uid "0FF50B7C-417A-4FDF-426B-1ABD4BB31612";
-	setAttr -k off ".v";
-createNode transform -n "MotionPath_Loc_07" -p "MotionPath_Locator";
-	rename -uid "A637D172-45B7-D9C0-1DB6-9A9323F4B00A";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
-	setAttr -k on ".UValue" 0.6;
-createNode locator -n "MotionPath_Loc_0Shape7" -p "MotionPath_Loc_07";
-	rename -uid "A00AF32A-4EE3-B7C1-5FF1-28AD5B661118";
-	setAttr -k off ".v";
-createNode transform -n "MotionPath_Loc_08" -p "MotionPath_Locator";
-	rename -uid "A769BF46-47B2-19CE-2D79-A48E07D0D498";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
-	setAttr -k on ".UValue" 0.7;
-createNode locator -n "MotionPath_Loc_0Shape8" -p "MotionPath_Loc_08";
-	rename -uid "0B86BE21-4ED9-7A5C-013F-3FA71DFBCAA4";
-	setAttr -k off ".v";
-createNode transform -n "MotionPath_Loc_09" -p "MotionPath_Locator";
-	rename -uid "0C80DF10-40CD-93CE-3ADB-2BA2A225F8E1";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
-	setAttr -k on ".UValue" 0.8;
-createNode locator -n "MotionPath_Loc_0Shape9" -p "MotionPath_Loc_09";
-	rename -uid "EA113939-4409-7AB2-2B53-3DBE1DC5CE69";
-	setAttr -k off ".v";
-createNode transform -n "MotionPath_Loc_010" -p "MotionPath_Locator";
-	rename -uid "BBB4C1BD-49D8-D2DB-4CF1-7BA4BFE48A6F";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
-	setAttr -k on ".UValue" 0.9;
-createNode locator -n "MotionPath_Loc_0Shape10" -p "MotionPath_Loc_010";
-	rename -uid "905E6E51-4747-8FAD-C7C2-609E40FE1EB6";
-	setAttr -k off ".v";
-createNode transform -n "MotionPath_Loc_011" -p "MotionPath_Locator";
-	rename -uid "E27DBA44-41B2-A65C-B896-DCA96AF91B21";
-	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
-	setAttr -k on ".UValue" 1;
-createNode locator -n "MotionPath_Loc_0Shape11" -p "MotionPath_Loc_011";
-	rename -uid "4337D445-4F4B-1418-16A7-3BB0283A0D9D";
-	setAttr -k off ".v";
-createNode transform -n "Root_1_Offset";
+	setAttr ".io" yes;
+	setAttr ".vir" yes;
+	setAttr ".vif" yes;
+	setAttr ".uvst[0].uvsn" -type "string" "map1";
+	setAttr ".cuvs" -type "string" "map1";
+	setAttr ".dcc" -type "string" "Ambient+Diffuse";
+	setAttr ".covm[0]"  0 1 1;
+	setAttr ".cdvm[0]"  0 1 1;
+createNode transform -n "Jnt_Grp";
+	rename -uid "95203DF0-4825-F6BC-7140-B8B5949CE7CA";
+createNode transform -n "Root_1_Offset" -p "Jnt_Grp";
 	rename -uid "935DAA76-41EA-F37F-3649-B98A758929F3";
 createNode transform -n "Root_1_Sub" -p "Root_1_Offset";
 	rename -uid "72F02D1C-4B69-022E-6230-16A57FF17E99";
@@ -668,9 +690,9 @@ createNode nurbsCurve -n "MarkerShape" -p "Marker";
 		-6.7857323231109108e-18 6.7857323231109139e-18 -0.11081941875543855
 		-2.2197910707351848e-17 -0.078361162489122449 -0.078361162489122727
 		;
-createNode transform -n "Nurbs" -p "Root_1";
+createNode transform -n "Nurbs" -p "Jnt_Grp";
 	rename -uid "D8159337-44E5-3454-02BC-5EB1650F6884";
-createNode transform -n "Nurbs" -p "|Root_1_Offset|Root_1_Sub|Root_1|Nurbs";
+createNode transform -n "Nurbs" -p "|Jnt_Grp|Nurbs";
 	rename -uid "C42D3D27-4D35-477F-8257-288F51DE954D";
 	setAttr ".v" no;
 	setAttr -l on ".tx";
@@ -683,7 +705,7 @@ createNode transform -n "Nurbs" -p "|Root_1_Offset|Root_1_Sub|Root_1|Nurbs";
 	setAttr -l on ".sx";
 	setAttr -l on ".sy";
 	setAttr -l on ".sz";
-createNode nurbsSurface -n "NurbsShape" -p "|Root_1_Offset|Root_1_Sub|Root_1|Nurbs|Nurbs";
+createNode nurbsSurface -n "NurbsShape" -p "|Jnt_Grp|Nurbs|Nurbs";
 	rename -uid "3883524A-45FD-FBDD-9DEA-D7BAE832E71E";
 	setAttr -k off ".v";
 	setAttr -s 2 ".iog";
@@ -702,7 +724,7 @@ createNode nurbsSurface -n "NurbsShape" -p "|Root_1_Offset|Root_1_Sub|Root_1|Nur
 	setAttr ".cps" 4;
 	setAttr ".nufa" 4.5;
 	setAttr ".nvfa" 4.5;
-createNode nurbsSurface -n "NurbsShapeOrig" -p "|Root_1_Offset|Root_1_Sub|Root_1|Nurbs|Nurbs";
+createNode nurbsSurface -n "NurbsShapeOrig" -p "|Jnt_Grp|Nurbs|Nurbs";
 	rename -uid "4DF439F1-4730-84E3-C38A-3EB0642205A8";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
@@ -1188,7 +1210,7 @@ createNode nurbsSurface -n "NurbsShapeOrig" -p "|Root_1_Offset|Root_1_Sub|Root_1
 		-0.29166666666666685 3.0616169978683121e-17 -0.85802440276723457
 		
 		;
-createNode transform -n "wave1Handle" -p "|Root_1_Offset|Root_1_Sub|Root_1|Nurbs|Nurbs";
+createNode transform -n "wave1Handle" -p "|Jnt_Grp|Nurbs|Nurbs";
 	rename -uid "9D9FB8E9-4335-661A-6F89-18BDE21CE273";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" -1.2952601953960158e-16 0 -0.00048676953032205403 ;
@@ -1200,7 +1222,7 @@ createNode deformWave -n "wave1HandleShape" -p "wave1Handle";
 	setAttr -k off ".v";
 	setAttr ".dd" -type "doubleArray" 7 0 1 0 0 1 0 0 ;
 	setAttr ".hw" 7.7000000000000028;
-createNode transform -n "NurbsCurve" -p "|Root_1_Offset|Root_1_Sub|Root_1|Nurbs";
+createNode transform -n "NurbsCurve" -p "|Jnt_Grp|Nurbs";
 	rename -uid "24D0C985-480A-6B58-DF6E-0D975D977CCE";
 	addAttr -ci true -sn "Test" -ln "Test" -at "double";
 	setAttr ".ove" yes;
@@ -1210,7 +1232,7 @@ createNode nurbsCurve -n "NurbsCurveShape" -p "NurbsCurve";
 	rename -uid "E84424E4-4D94-00EC-4AAE-89B54F3249BB";
 	setAttr -k off ".v";
 	setAttr ".tw" yes;
-createNode transform -n "Jnt_Constraint";
+createNode transform -n "Jnt_Constraint" -p "Jnt_Grp";
 	rename -uid "C50A11E9-4624-7F63-273B-009FE47EAC8D";
 createNode parentConstraint -n "MotionPath_jnt_01_parentConstraint1" -p "Jnt_Constraint";
 	rename -uid "D23C4B8E-4520-F2E8-ADBF-F8BBE492D5A1";
@@ -1275,7 +1297,7 @@ createNode parentConstraint -n "MotionPath_jnt_02_parentConstraint1" -p "Jnt_Con
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
 	setAttr ".lr" -type "double3" -89.999999999999986 0 0 ;
-	setAttr ".rst" -type "double3" 3.944304526105059e-31 0 0 ;
+	setAttr ".rst" -type "double3" 3.9443045261050599e-31 0 0 ;
 	setAttr -k on ".w0";
 createNode scaleConstraint -n "MotionPath_jnt_02_scaleConstraint1" -p "Jnt_Constraint";
 	rename -uid "AF2B25ED-4520-50E4-70E3-61AD1EA094D1";
@@ -1338,7 +1360,7 @@ createNode parentConstraint -n "MotionPath_jnt_03_parentConstraint1" -p "Jnt_Con
 	setAttr ".erp" yes;
 	setAttr ".tg[0].tot" -type "double3" 0 -3.5527136788005009e-15 0 ;
 	setAttr ".lr" -type "double3" -89.999999999999986 0 0 ;
-	setAttr ".rst" -type "double3" 3.944304526105059e-31 0 -7.8886090522101181e-31 ;
+	setAttr ".rst" -type "double3" 3.9443045261050599e-31 0 -7.8886090522101181e-31 ;
 	setAttr -k on ".w0";
 createNode scaleConstraint -n "MotionPath_jnt_04_scaleConstraint1" -p "Jnt_Constraint";
 	rename -uid "F2D73CD2-4417-E859-7523-609A45E42361";
@@ -1379,9 +1401,9 @@ createNode parentConstraint -n "MotionPath_jnt_04_parentConstraint1" -p "Jnt_Con
 	setAttr -k off ".sy";
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
-	setAttr ".tg[0].tot" -type "double3" -3.944304526105059e-31 0 0 ;
+	setAttr ".tg[0].tot" -type "double3" -3.9443045261050599e-31 0 0 ;
 	setAttr ".lr" -type "double3" -89.999999999999986 0 0 ;
-	setAttr ".rst" -type "double3" 0 1.7763568394002505e-15 -3.944304526105059e-31 ;
+	setAttr ".rst" -type "double3" 0 1.7763568394002505e-15 -3.9443045261050599e-31 ;
 	setAttr -k on ".w0";
 createNode scaleConstraint -n "MotionPath_jnt_05_scaleConstraint1" -p "Jnt_Constraint";
 	rename -uid "00467936-4982-217A-8B99-5C80EDF1D2EA";
@@ -1512,7 +1534,7 @@ createNode parentConstraint -n "MotionPath_jnt_07_parentConstraint1" -p "Jnt_Con
 	setAttr ".tg[0].tot" -type "double3" 7.8886090522101181e-31 8.8817841970012523e-16 
 		-5.9164567891575885e-31 ;
 	setAttr ".lr" -type "double3" -89.999999999999986 0 0 ;
-	setAttr ".rst" -type "double3" 7.8886090522101181e-31 0 -3.944304526105059e-31 ;
+	setAttr ".rst" -type "double3" 7.8886090522101181e-31 0 -3.9443045261050599e-31 ;
 	setAttr -k on ".w0";
 createNode scaleConstraint -n "MotionPath_jnt_08_scaleConstraint1" -p "Jnt_Constraint";
 	rename -uid "EFD7FADA-42D2-4E5A-7D76-F8817AA98CCB";
@@ -1690,151 +1712,132 @@ createNode parentConstraint -n "MotionPath_jnt_011_parentConstraint1" -p "Jnt_Co
 	setAttr ".lr" -type "double3" -89.999999999999986 0 0 ;
 	setAttr ".rst" -type "double3" 0 0 7.8886090522101181e-31 ;
 	setAttr -k on ".w0";
-createNode joint -n "MotionPath_Root";
-	rename -uid "D3507399-4365-0D68-75BA-7D92668AE7C0";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "MotionPath_jnt_01" -p "MotionPath_Root";
-	rename -uid "27C8766A-4528-EBBC-DEE0-6B9C164754EF";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44800000000000001 0 0 0 0 9.9475983006414028e-17 -0.44800000000000001 0
-		 0 0.44800000000000001 9.9475983006414028e-17 0 -4.9960036108132054e-16 -2.792598419361492e-33 11.999999014994707 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode joint -n "MotionPath_jnt_02" -p "MotionPath_Root";
-	rename -uid "72E680BD-4176-8CE9-4EBF-BDBFDF96FD84";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -7.3989094955972589e-16 -5.3442000129575933e-32 9.598636219507318 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode joint -n "MotionPath_jnt_03" -p "MotionPath_Root";
-	rename -uid "E79A04D6-4393-91A7-B759-FFBD82B65EB9";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -1.3427045764738934e-15 -5.4972514044564293e-31 7.1972734261751814 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode joint -n "MotionPath_jnt_04" -p "MotionPath_Root";
-	rename -uid "C92A280C-4AD4-0508-8076-EFA94CAC14AF";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -1.5845040029851748e-15 -2.0422153124848908e-31 4.7959104533049803 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode joint -n "MotionPath_jnt_05" -p "MotionPath_Root";
-	rename -uid "8CB00405-415B-9F89-32AC-129BE1928A10";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -2.0666370410499278e-15 -3.4927916195099874e-31 2.3945478380766105 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode joint -n "MotionPath_jnt_06" -p "MotionPath_Root";
-	rename -uid "51153A59-443F-CB73-B946-D59E90EF5380";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -2.4484458149937563e-15 -3.9731850528845054e-31 -0.0068147772020519231 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode joint -n "MotionPath_jnt_07" -p "MotionPath_Root";
-	rename -uid "E8144BE1-4081-A2EF-CB23-F1A9F70758BC";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -2.6994217513770581e-15 -4.462125475626452e-31 -2.4081781081425881 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode joint -n "MotionPath_jnt_08" -p "MotionPath_Root";
-	rename -uid "16204511-40EF-6ED8-A8EB-9FA4903BC501";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -3.217906689970217e-15 -5.9043196749220472e-31 -4.8095400077090877 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode joint -n "MotionPath_jnt_09" -p "MotionPath_Root";
-	rename -uid "9BB79147-49D5-CE25-40D7-12B9E74D31E8";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -3.4567688746210689e-15 -9.5195704834461646e-31 -7.2109033384102208 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode joint -n "MotionPath_jnt_10" -p "MotionPath_Root";
-	rename -uid "9C0B18B5-4C58-7E70-365A-FE89A1ED3605";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -4.0326118965228229e-15 -3.8844827939277991e-31 -9.6122652371650474 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode joint -n "MotionPath_jnt_11" -p "MotionPath_Root";
-	rename -uid "710DF80B-40E7-9166-7DDF-72996424DD0F";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".uoc" 1;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".bps" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -4.246603069191223e-15 -4.3804279371827239e-31 -12.013628569398817 1;
-	setAttr ".radi" 0.7844338062481061;
-createNode transform -n "MotionPath_MDL";
-	rename -uid "9495CF5D-4103-11DB-6C73-EC946A50F8DB";
-createNode transform -n "Cylinder" -p "MotionPath_MDL";
-	rename -uid "B3EAA259-4565-5C1D-6AC7-E5A6BE66092A";
-	setAttr -l on ".tx";
-	setAttr -l on ".ty";
-	setAttr -l on ".tz";
-	setAttr ".r" -type "double3" 90.000000000000028 0 0 ;
-	setAttr -l on ".rx";
-	setAttr -l on ".ry";
-	setAttr -l on ".rz";
-	setAttr -l on ".sx";
-	setAttr -l on ".sy";
-	setAttr -l on ".sz";
-createNode mesh -n "CylinderShape" -p "Cylinder";
-	rename -uid "EECB04B8-4730-8FF6-4111-FDBF73FC6CD6";
+createNode transform -n "MotionPath_Locator" -p "Jnt_Grp";
+	rename -uid "C1D27752-4D81-E550-0437-2C8470CF356F";
+createNode transform -n "MotionPath_Loc_01" -p "MotionPath_Locator";
+	rename -uid "60C2B8A9-43F3-EBDE-957A-5B88617BE967";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.448 0.448 0.448 ;
+	setAttr -k on ".UValue";
+createNode locator -n "MotionPath_Loc_0Shape1" -p "MotionPath_Loc_01";
+	rename -uid "901843F3-4741-310C-1065-718378CFC0C9";
 	setAttr -k off ".v";
-	setAttr -s 4 ".iog[0].og";
-	setAttr ".vir" yes;
-	setAttr ".vif" yes;
-	setAttr ".uvst[0].uvsn" -type "string" "map1";
-	setAttr ".cuvs" -type "string" "map1";
-	setAttr ".dcc" -type "string" "Ambient+Diffuse";
-	setAttr ".covm[0]"  0 1 1;
-	setAttr ".cdvm[0]"  0 1 1;
-	setAttr ".vcs" 2;
-createNode mesh -n "CylinderShape1Orig" -p "Cylinder";
-	rename -uid "0B183E49-4EA4-6DDF-FA28-17B08F6103AE";
+createNode transform -n "MotionPath_Loc_02" -p "MotionPath_Locator";
+	rename -uid "10DE2155-4C43-7E8E-46FD-F7BFFCEC930B";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
+	setAttr -k on ".UValue" 0.1;
+createNode locator -n "MotionPath_Loc_0Shape2" -p "MotionPath_Loc_02";
+	rename -uid "2157C815-4B96-712F-4B9E-1DAC2E7EEC9C";
 	setAttr -k off ".v";
-	setAttr ".io" yes;
-	setAttr ".vir" yes;
-	setAttr ".vif" yes;
-	setAttr ".uvst[0].uvsn" -type "string" "map1";
-	setAttr ".cuvs" -type "string" "map1";
-	setAttr ".dcc" -type "string" "Ambient+Diffuse";
-	setAttr ".covm[0]"  0 1 1;
-	setAttr ".cdvm[0]"  0 1 1;
+createNode transform -n "MotionPath_Loc_03" -p "MotionPath_Locator";
+	rename -uid "F761C6FE-4B8A-8D9B-76D3-AAB3207858B2";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
+	setAttr -k on ".UValue" 0.2;
+createNode locator -n "MotionPath_Loc_0Shape3" -p "MotionPath_Loc_03";
+	rename -uid "43CD5776-4F24-2345-5C94-3E808148E9F9";
+	setAttr -k off ".v";
+createNode transform -n "MotionPath_Loc_04" -p "MotionPath_Locator";
+	rename -uid "8B9A3473-4C1B-DA30-C2CC-AE9AF0240C00";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
+	setAttr -k on ".UValue" 0.3;
+createNode locator -n "MotionPath_Loc_0Shape4" -p "MotionPath_Loc_04";
+	rename -uid "6CD3C904-4513-41E7-FEB2-C5AD0F03D84A";
+	setAttr -k off ".v";
+createNode transform -n "MotionPath_Loc_05" -p "MotionPath_Locator";
+	rename -uid "2F41EB9A-4891-4362-1CD8-018DD8753441";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
+	setAttr -k on ".UValue" 0.4;
+createNode locator -n "MotionPath_Loc_0Shape5" -p "MotionPath_Loc_05";
+	rename -uid "CC532B16-47A3-7E5C-6049-21B8A04D114C";
+	setAttr -k off ".v";
+createNode transform -n "MotionPath_Loc_06" -p "MotionPath_Locator";
+	rename -uid "E58AB2A4-4B11-AD2D-60B6-449B4FEDBA55";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
+	setAttr -k on ".UValue" 0.5;
+createNode locator -n "MotionPath_Loc_0Shape6" -p "MotionPath_Loc_06";
+	rename -uid "0FF50B7C-417A-4FDF-426B-1ABD4BB31612";
+	setAttr -k off ".v";
+createNode transform -n "MotionPath_Loc_07" -p "MotionPath_Locator";
+	rename -uid "A637D172-45B7-D9C0-1DB6-9A9323F4B00A";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
+	setAttr -k on ".UValue" 0.6;
+createNode locator -n "MotionPath_Loc_0Shape7" -p "MotionPath_Loc_07";
+	rename -uid "A00AF32A-4EE3-B7C1-5FF1-28AD5B661118";
+	setAttr -k off ".v";
+createNode transform -n "MotionPath_Loc_08" -p "MotionPath_Locator";
+	rename -uid "A769BF46-47B2-19CE-2D79-A48E07D0D498";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
+	setAttr -k on ".UValue" 0.7;
+createNode locator -n "MotionPath_Loc_0Shape8" -p "MotionPath_Loc_08";
+	rename -uid "0B86BE21-4ED9-7A5C-013F-3FA71DFBCAA4";
+	setAttr -k off ".v";
+createNode transform -n "MotionPath_Loc_09" -p "MotionPath_Locator";
+	rename -uid "0C80DF10-40CD-93CE-3ADB-2BA2A225F8E1";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
+	setAttr -k on ".UValue" 0.8;
+createNode locator -n "MotionPath_Loc_0Shape9" -p "MotionPath_Loc_09";
+	rename -uid "EA113939-4409-7AB2-2B53-3DBE1DC5CE69";
+	setAttr -k off ".v";
+createNode transform -n "MotionPath_Loc_010" -p "MotionPath_Locator";
+	rename -uid "BBB4C1BD-49D8-D2DB-4CF1-7BA4BFE48A6F";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
+	setAttr -k on ".UValue" 0.9;
+createNode locator -n "MotionPath_Loc_0Shape10" -p "MotionPath_Loc_010";
+	rename -uid "905E6E51-4747-8FAD-C7C2-609E40FE1EB6";
+	setAttr -k off ".v";
+createNode transform -n "MotionPath_Loc_011" -p "MotionPath_Locator";
+	rename -uid "E27DBA44-41B2-A65C-B896-DCA96AF91B21";
+	addAttr -ci true -sn "UValue" -ln "UValue" -min 0 -max 1 -at "double";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".s" -type "double3" 0.44801068805488148 0.44801068805488148 0.44801068805488148 ;
+	setAttr -k on ".UValue" 1;
+createNode locator -n "MotionPath_Loc_0Shape11" -p "MotionPath_Loc_011";
+	rename -uid "4337D445-4F4B-1418-16A7-3BB0283A0D9D";
+	setAttr -k off ".v";
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "F2A4EF31-4823-DFC8-311B-0DBFDEBE7F54";
+	rename -uid "783299B1-4EE5-F8BB-19B0-D2BAF591D958";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "B420048D-4AE3-A968-D74A-94BBC3250793";
+	rename -uid "1242649A-4BF7-4731-36A7-50AA1FC4FCFB";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "79663B34-4787-243B-71D3-AEB5AC8F8A70";
+	rename -uid "7F838F5C-42D8-441B-13B7-CD84D804F004";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "4FAE50A1-4CAF-7103-34E9-2BAB005D2037";
+	rename -uid "639006BA-43D0-A211-3847-3488E47F2677";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "356E353C-4685-5DDE-6624-CB88C2BEA673";
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "AAD5EA71-49CC-C91A-55F3-8E9A34507380";
+	rename -uid "BF86B9D3-4BD0-9D2E-7FEA-35A07E1E38A4";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "883C9A8C-4E02-7AC3-5EA9-24BFBAD5E3DF";
 	setAttr ".g" yes;
@@ -4336,28 +4339,28 @@ createNode skinCluster -n "skinCluster2";
 		2 0 0.99999999893865454 1 1.0613454202205494e-09
 		1 10 1;
 	setAttr -s 11 ".pm";
-	setAttr ".pm[0]" -type "matrix" 2.2320896055888282 -0 -0 -0 -0 4.9562345463024031e-16 2.2320896055888282 0
-		 0 -2.2320896055888282 4.9562345463024031e-16 -0 9.4787985698033445e-15 -26.815495455160086 5.9542360942099947e-15 1;
-	setAttr ".pm[1]" -type "matrix" 2.2320896055888282 -0 -0 -0 -0 4.9562345463024031e-16 2.2320896055888282 0
-		 0 -2.2320896055888282 4.9562345463024031e-16 -0 9.001151097602444e-15 -21.455437322038936 4.764064103665908e-15 1;
-	setAttr ".pm[2]" -type "matrix" 2.2320896055888282 -0 -0 -0 -0 4.9562345463024031e-16 2.2320896055888282 0
-		 0 -2.2320896055888282 4.9562345463024031e-16 -0 7.7158178739646788e-15 -16.095382388571238 3.5738928235876089e-15 1;
-	setAttr ".pm[3]" -type "matrix" 2.2320896055888282 -0 -0 -0 -0 4.9562345463024031e-16 2.2320896055888282 0
-		 0 -2.2320896055888282 4.9562345463024031e-16 -0 7.1826560744372737e-15 -10.735324258871069 2.3837208338031322e-15 1;
-	setAttr ".pm[4]" -type "matrix" 2.2320896055888282 -0 -0 -0 -0 4.9562345463024031e-16 2.2320896055888282 0
-		 0 -2.2320896055888282 4.9562345463024031e-16 -0 6.0253512323491218e-15 -5.37526932359164 1.193549553322547e-15 1;
-	setAttr ".pm[5]" -type "matrix" 2.2320896055888282 -0 -0 -0 -0 4.9562345463024031e-16 2.2320896055888282 0
-		 0 -2.2320896055888282 4.9562345463024031e-16 -0 5.4651504534950309e-15 -0.015211193357103817 3.3775634194172643e-18 1;
-	setAttr ".pm[6]" -type "matrix" 2.2320896055888282 -0 0 -0 -0 4.9562345463024031e-16 2.2320896055888282 0
-		 0 -2.2320896055888282 4.9562345463024031e-16 -0 4.6129190578523966e-15 5.3448453394560032 -1.1867940717849023e-15 1;
-	setAttr ".pm[7]" -type "matrix" 2.2320896055888282 -0 0 -0 -0 4.9562345463024031e-16 2.2320896055888282 0
-		 0 -2.2320896055888282 4.9562345463024031e-16 -0 3.5367549150770986e-15 10.704901872156853 -2.3769657069642956e-15 1;
-	setAttr ".pm[8]" -type "matrix" 2.2320896055888282 -0 0 -0 -0 4.9562345463024031e-16 2.2320896055888282 0
-		 0 -2.2320896055888282 4.9562345463024031e-16 -0 2.9970369285239277e-15 16.064959203146316 -3.5671375193993687e-15 1;
-	setAttr ".pm[9]" -type "matrix" 2.2320896055888282 -0 0 -0 -0 4.9562345463024031e-16 2.2320896055888282 0
-		 0 -2.2320896055888282 4.9562345463024031e-16 -0 1.6515028977815123e-15 21.425016133390731 -4.7573092428511667e-15 1;
-	setAttr ".pm[10]" -type "matrix" 2.2321428571428568 -0 0 -0 -0 4.9563527885051623e-16 2.2321428571428568 0
-		 0 -2.2321428571428568 4.9563527885051623e-16 -0 1.1151793774136618e-15 26.785712087041752 -5.9476228580028216e-15 0.99999999999999989;
+	setAttr ".pm[0]" -type "matrix" 2.2320896055888282 0 0 0 0 4.9562345463024031e-16 2.2320896055888282 0
+		 0 -2.2320896055888282 4.9562345463024031e-16 0 9.4787985698033445e-15 -26.815495455160086 5.9542360942099947e-15 1;
+	setAttr ".pm[1]" -type "matrix" 2.2320896055888282 0 0 0 0 4.9562345463024031e-16 2.2320896055888282 0
+		 0 -2.2320896055888282 4.9562345463024031e-16 0 9.001151097602444e-15 -21.455437322038936 4.764064103665908e-15 1;
+	setAttr ".pm[2]" -type "matrix" 2.2320896055888282 0 0 0 0 4.9562345463024031e-16 2.2320896055888282 0
+		 0 -2.2320896055888282 4.9562345463024031e-16 0 7.7158178739646788e-15 -16.095382388571238 3.5738928235876089e-15 1;
+	setAttr ".pm[3]" -type "matrix" 2.2320896055888282 0 0 0 0 4.9562345463024031e-16 2.2320896055888282 0
+		 0 -2.2320896055888282 4.9562345463024031e-16 0 7.1826560744372737e-15 -10.735324258871069 2.3837208338031322e-15 1;
+	setAttr ".pm[4]" -type "matrix" 2.2320896055888282 0 0 0 0 4.9562345463024031e-16 2.2320896055888282 0
+		 0 -2.2320896055888282 4.9562345463024031e-16 0 6.0253512323491218e-15 -5.37526932359164 1.1935495533225472e-15 1;
+	setAttr ".pm[5]" -type "matrix" 2.2320896055888282 0 0 0 0 4.9562345463024031e-16 2.2320896055888282 0
+		 0 -2.2320896055888282 4.9562345463024031e-16 0 5.4651504534950309e-15 -0.015211193357103817 3.3775634194172643e-18 1;
+	setAttr ".pm[6]" -type "matrix" 2.2320896055888282 0 0 0 0 4.9562345463024031e-16 2.2320896055888282 0
+		 0 -2.2320896055888282 4.9562345463024031e-16 0 4.6129190578523966e-15 5.3448453394560032 -1.1867940717849023e-15 1;
+	setAttr ".pm[7]" -type "matrix" 2.2320896055888282 0 0 0 0 4.9562345463024031e-16 2.2320896055888282 0
+		 0 -2.2320896055888282 4.9562345463024031e-16 0 3.5367549150770986e-15 10.704901872156853 -2.3769657069642956e-15 1;
+	setAttr ".pm[8]" -type "matrix" 2.2320896055888282 0 0 0 0 4.9562345463024031e-16 2.2320896055888282 0
+		 0 -2.2320896055888282 4.9562345463024031e-16 0 2.9970369285239277e-15 16.064959203146316 -3.5671375193993687e-15 1;
+	setAttr ".pm[9]" -type "matrix" 2.2320896055888282 0 0 0 0 4.9562345463024031e-16 2.2320896055888282 0
+		 0 -2.2320896055888282 4.9562345463024031e-16 0 1.6515028977815123e-15 21.425016133390731 -4.7573092428511667e-15 1;
+	setAttr ".pm[10]" -type "matrix" 2.2321428571428568 0 0 0 0 4.9563527885051623e-16 2.2321428571428568 0
+		 0 -2.2321428571428568 4.9563527885051623e-16 0 1.1151793774136618e-15 26.785712087041752 -5.9476228580028216e-15 0.99999999999999989;
 	setAttr ".gm" -type "matrix" 1 0 0 0 0 -4.4408920985006262e-16 1 0 0 -1 -4.4408920985006262e-16 0
 		 0 0 0 1;
 	setAttr -s 11 ".ma";
@@ -4406,7 +4409,7 @@ createNode dagPose -n "bindPose3";
 	setAttr ".wm[7]" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
 		 0 0.44801068805488148 9.9478356231337601e-17 0 -3.217906689970217e-15 -5.9043196749220472e-31 -4.8095400077090895 1;
 	setAttr ".wm[9]" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
-		 0 0.44801068805488148 9.9478356231337601e-17 0 -2.6994217513770585e-15 -4.462125475626452e-31 -2.4081781081425881 1;
+		 0 0.44801068805488148 9.9478356231337601e-17 0 -2.6994217513770585e-15 -4.4621254756264529e-31 -2.4081781081425881 1;
 	setAttr ".wm[11]" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
 		 0 0.44801068805488148 9.9478356231337601e-17 0 -2.4484458149937567e-15 -3.9731850528845054e-31 -0.0068147772020519248 1;
 	setAttr ".wm[13]" -type "matrix" 0.44801068805488148 0 0 0 0 9.9478356231337601e-17 -0.44801068805488148 0
@@ -4423,7 +4426,7 @@ createNode dagPose -n "bindPose3";
 	setAttr ".xm[0]" -type "matrix" "xform" 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 		 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 1 yes;
 	setAttr ".xm[1]" -type "matrix" "xform" 0.44801068805488148 0.44801068805488148 0.44801068805488148 -1.5707963267948966
-		 -0 0 0 -4.2466030691912238e-15 -7.9146091064593457e-31 -12.013628569398819 0
+		 0 0 0 -4.2466030691912238e-15 -7.9146091064593457e-31 -12.013628569398819 0
 		 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 1 yes;
 	setAttr ".xm[2]" -type "matrix" "xform" 1 1 1 0 0 0 0 1.5777218104420236e-30
 		 -3.5527136788005009e-15 1.5777218104420236e-30 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
@@ -4444,7 +4447,7 @@ createNode dagPose -n "bindPose3";
 	setAttr ".xm[8]" -type "matrix" "xform" 1 1 1 0 0 0 0 0 -3.5527136788005009e-15
 		 7.8886090522101181e-31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 1 yes;
 	setAttr ".xm[9]" -type "matrix" "xform" 0.44801068805488148 0.44801068805488148 0.44801068805488148 -1.5707963267948966
-		 2.1782591723412151e-16 0 0 -2.6994217513770585e-15 -4.462125475626452e-31 -2.4081781081425881 0
+		 2.1782591723412151e-16 0 0 -2.6994217513770585e-15 -4.4621254756264529e-31 -2.4081781081425881 0
 		 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 1 yes;
 	setAttr ".xm[10]" -type "matrix" "xform" 1 1 1 0 0 0 0 7.8886090522101181e-31
 		 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 1 yes;
@@ -4465,23 +4468,23 @@ createNode dagPose -n "bindPose3";
 		 0.44801068805488148 -1.5707963267948966 9.5409623118606356e-17 0 0 -1.584504002985175e-15
 		 -2.0422153124848908e-31 4.7959104533049812 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
 		0 0 0 1 1 1 1 yes;
-	setAttr ".xm[16]" -type "matrix" "xform" 1 1 1 0 0 0 0 3.944304526105059e-31
-		 1.7763568394002505e-15 -3.944304526105059e-31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+	setAttr ".xm[16]" -type "matrix" "xform" 1 1 1 0 0 0 0 3.9443045261050599e-31
+		 1.7763568394002505e-15 -3.9443045261050599e-31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
 		0 0 0 1 1 1 1 yes;
 	setAttr ".xm[17]" -type "matrix" "xform" 0.44801068805488148 0.44801068805488148
 		 0.44801068805488148 -1.5707963267948966 1.4871541719496552e-16 0 0 -1.3427045764738936e-15
 		 -1.9630702351798081e-31 7.1972734261751814 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
 		0 0 0 1 1 1 1 yes;
-	setAttr ".xm[18]" -type "matrix" "xform" 1 1 1 0 0 0 0 3.944304526105059e-31
+	setAttr ".xm[18]" -type "matrix" "xform" 1 1 1 0 0 0 0 3.9443045261050599e-31
 		 0 -7.8886090522101181e-31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 1 yes;
 	setAttr ".xm[19]" -type "matrix" "xform" 0.44801068805488148 0.44801068805488148
 		 0.44801068805488148 -1.5707963267948966 1.8860301137080428e-16 0 0 -7.3989094955972608e-16
 		 -5.3442000129575933e-32 9.598636219507318 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
 		0 0 0 1 1 1 1 yes;
-	setAttr ".xm[20]" -type "matrix" "xform" 1 1 1 0 0 0 0 3.944304526105059e-31
+	setAttr ".xm[20]" -type "matrix" "xform" 1 1 1 0 0 0 0 3.9443045261050599e-31
 		 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 1 yes;
 	setAttr ".xm[21]" -type "matrix" "xform" 0.44800000000000001 0.44800000000000001
-		 0.44800000000000001 -1.5707963267948966 -0 -0 0 -4.9960036108132044e-16 -2.792598419361492e-33
+		 0.44800000000000001 -1.5707963267948966 0 0 0 -4.9960036108132044e-16 -2.792598419361492e-33
 		 11.999999014994707 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 1 yes;
 	setAttr ".xm[22]" -type "matrix" "xform" 1 1 1 0 0 0 0 -1.9721522630525295e-31
 		 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 1 yes;
@@ -4550,212 +4553,173 @@ createNode multiplyDivide -n "StartInclude_Calc_010";
 createNode multiplyDivide -n "StartInclude_Calc_011";
 	rename -uid "5D066359-4F6B-9F79-2D5C-8D853360C498";
 createNode nodeGraphEditorInfo -n "MayaNodeEditorSavedTabsInfo";
-	rename -uid "90DE0EB4-428F-87F6-04D7-58BA90E255BA";
+	rename -uid "7F7F7D31-4A57-D29B-7ACA-93860398DEC3";
 	setAttr ".tgi[0].tn" -type "string" "Untitled_1";
-	setAttr ".tgi[0].vl" -type "double2" 35531.299278557417 9025.6363665148638 ;
-	setAttr ".tgi[0].vh" -type "double2" 36926.219983664741 9777.3737893061625 ;
-	setAttr -s 67 ".tgi[0].ni";
-	setAttr ".tgi[0].ni[0].x" 36111.4296875;
-	setAttr ".tgi[0].ni[0].y" 9430;
-	setAttr ".tgi[0].ni[0].nvs" 18304;
-	setAttr ".tgi[0].ni[1].x" 36418.5703125;
-	setAttr ".tgi[0].ni[1].y" 9024.2861328125;
-	setAttr ".tgi[0].ni[1].nvs" 18304;
-	setAttr ".tgi[0].ni[2].x" 36111.4296875;
-	setAttr ".tgi[0].ni[2].y" 9328.5712890625;
-	setAttr ".tgi[0].ni[2].nvs" 18304;
-	setAttr ".tgi[0].ni[3].x" 36111.4296875;
-	setAttr ".tgi[0].ni[3].y" 9227.142578125;
-	setAttr ".tgi[0].ni[3].nvs" 18304;
-	setAttr ".tgi[0].ni[4].x" 36111.4296875;
-	setAttr ".tgi[0].ni[4].y" 8618.5712890625;
-	setAttr ".tgi[0].ni[4].nvs" 18304;
-	setAttr ".tgi[0].ni[5].x" 36111.4296875;
-	setAttr ".tgi[0].ni[5].y" 9531.4287109375;
-	setAttr ".tgi[0].ni[5].nvs" 18304;
-	setAttr ".tgi[0].ni[6].x" 36111.4296875;
-	setAttr ".tgi[0].ni[6].y" 9125.7138671875;
-	setAttr ".tgi[0].ni[6].nvs" 18304;
-	setAttr ".tgi[0].ni[7].x" 36111.4296875;
-	setAttr ".tgi[0].ni[7].y" 8517.142578125;
-	setAttr ".tgi[0].ni[7].nvs" 18304;
-	setAttr ".tgi[0].ni[8].x" 36111.4296875;
-	setAttr ".tgi[0].ni[8].y" 9024.2861328125;
-	setAttr ".tgi[0].ni[8].nvs" 18304;
-	setAttr ".tgi[0].ni[9].x" 36111.4296875;
-	setAttr ".tgi[0].ni[9].y" 8922.857421875;
-	setAttr ".tgi[0].ni[9].nvs" 18304;
-	setAttr ".tgi[0].ni[10].x" 36111.4296875;
-	setAttr ".tgi[0].ni[10].y" 8821.4287109375;
-	setAttr ".tgi[0].ni[10].nvs" 18304;
-	setAttr ".tgi[0].ni[11].x" 36111.4296875;
-	setAttr ".tgi[0].ni[11].y" 8720;
-	setAttr ".tgi[0].ni[11].nvs" 18304;
-	setAttr ".tgi[0].ni[12].x" 33699.86328125;
-	setAttr ".tgi[0].ni[12].y" 6814.3408203125;
-	setAttr ".tgi[0].ni[12].nvs" 18306;
-	setAttr ".tgi[0].ni[13].x" 34757.6875;
-	setAttr ".tgi[0].ni[13].y" 6647.818359375;
+	setAttr ".tgi[0].vl" -type "double2" 33079.593477502385 5742.0061578172099 ;
+	setAttr ".tgi[0].vh" -type "double2" 37029.289769754694 7870.5389845757527 ;
+	setAttr -s 54 ".tgi[0].ni";
+	setAttr ".tgi[0].ni[0].x" 33315.7734375;
+	setAttr ".tgi[0].ni[0].y" 7209.767578125;
+	setAttr ".tgi[0].ni[0].nvs" 18310;
+	setAttr ".tgi[0].ni[1].x" 35040.71484375;
+	setAttr ".tgi[0].ni[1].y" 7918.91943359375;
+	setAttr ".tgi[0].ni[1].nvs" 18308;
+	setAttr ".tgi[0].ni[2].x" 34741.7890625;
+	setAttr ".tgi[0].ni[2].y" 6789.2607421875;
+	setAttr ".tgi[0].ni[2].nvs" 18308;
+	setAttr ".tgi[0].ni[3].x" 35009.1953125;
+	setAttr ".tgi[0].ni[3].y" 6768.82421875;
+	setAttr ".tgi[0].ni[3].nvs" 18308;
+	setAttr ".tgi[0].ni[4].x" 34416.7421875;
+	setAttr ".tgi[0].ni[4].y" 6480.1953125;
+	setAttr ".tgi[0].ni[4].nvs" 18308;
+	setAttr ".tgi[0].ni[5].x" 35021.36328125;
+	setAttr ".tgi[0].ni[5].y" 6151.1494140625;
+	setAttr ".tgi[0].ni[5].nvs" 18308;
+	setAttr ".tgi[0].ni[6].x" 34733.5703125;
+	setAttr ".tgi[0].ni[6].y" 7918.91943359375;
+	setAttr ".tgi[0].ni[6].nvs" 18308;
+	setAttr ".tgi[0].ni[7].x" 33959.1796875;
+	setAttr ".tgi[0].ni[7].y" 7696.0791015625;
+	setAttr ".tgi[0].ni[7].nvs" 18308;
+	setAttr ".tgi[0].ni[8].x" 32831.28515625;
+	setAttr ".tgi[0].ni[8].y" 7085.54150390625;
+	setAttr ".tgi[0].ni[8].nvs" 18310;
+	setAttr ".tgi[0].ni[9].x" 34757.6875;
+	setAttr ".tgi[0].ni[9].y" 6647.818359375;
+	setAttr ".tgi[0].ni[9].nvs" 18308;
+	setAttr ".tgi[0].ni[10].x" 33938.109375;
+	setAttr ".tgi[0].ni[10].y" 7147.978515625;
+	setAttr ".tgi[0].ni[10].nvs" 18308;
+	setAttr ".tgi[0].ni[11].x" 34746.76953125;
+	setAttr ".tgi[0].ni[11].y" 7298.99853515625;
+	setAttr ".tgi[0].ni[11].nvs" 18308;
+	setAttr ".tgi[0].ni[12].x" 35014.87109375;
+	setAttr ".tgi[0].ni[12].y" 6610.3515625;
+	setAttr ".tgi[0].ni[12].nvs" 18308;
+	setAttr ".tgi[0].ni[13].x" 35023.95703125;
+	setAttr ".tgi[0].ni[13].y" 6296.8125;
 	setAttr ".tgi[0].ni[13].nvs" 18308;
-	setAttr ".tgi[0].ni[14].x" 33946.0390625;
-	setAttr ".tgi[0].ni[14].y" 6966.35595703125;
-	setAttr ".tgi[0].ni[14].nvs" 18308;
-	setAttr ".tgi[0].ni[15].x" 33938.109375;
-	setAttr ".tgi[0].ni[15].y" 7147.978515625;
+	setAttr ".tgi[0].ni[14].x" 31904.376953125;
+	setAttr ".tgi[0].ni[14].y" 6627.072265625;
+	setAttr ".tgi[0].ni[14].nvs" 18309;
+	setAttr ".tgi[0].ni[15].x" 33954.82421875;
+	setAttr ".tgi[0].ni[15].y" 6135.48876953125;
 	setAttr ".tgi[0].ni[15].nvs" 18308;
-	setAttr ".tgi[0].ni[16].x" 32367.814453125;
-	setAttr ".tgi[0].ni[16].y" 6753.09130859375;
+	setAttr ".tgi[0].ni[16].x" 34003.4609375;
+	setAttr ".tgi[0].ni[16].y" 8089.6025390625;
 	setAttr ".tgi[0].ni[16].nvs" 18310;
-	setAttr ".tgi[0].ni[17].x" 34721.03515625;
-	setAttr ".tgi[0].ni[17].y" 6146.60791015625;
+	setAttr ".tgi[0].ni[17].x" 34455.01953125;
+	setAttr ".tgi[0].ni[17].y" 6964.34619140625;
 	setAttr ".tgi[0].ni[17].nvs" 18308;
-	setAttr ".tgi[0].ni[18].x" 33321.2109375;
-	setAttr ".tgi[0].ni[18].y" 8297.2705078125;
-	setAttr ".tgi[0].ni[18].nvs" 18310;
-	setAttr ".tgi[0].ni[19].x" 34746.76953125;
-	setAttr ".tgi[0].ni[19].y" 7298.99853515625;
+	setAttr ".tgi[0].ni[18].x" 33946.0390625;
+	setAttr ".tgi[0].ni[18].y" 6966.35595703125;
+	setAttr ".tgi[0].ni[18].nvs" 18308;
+	setAttr ".tgi[0].ni[19].x" 34451.08984375;
+	setAttr ".tgi[0].ni[19].y" 7146.3330078125;
 	setAttr ".tgi[0].ni[19].nvs" 18308;
-	setAttr ".tgi[0].ni[20].x" 34727.5;
-	setAttr ".tgi[0].ni[20].y" 7689.9560546875;
-	setAttr ".tgi[0].ni[20].nvs" 18308;
-	setAttr ".tgi[0].ni[21].x" 31625.728515625;
-	setAttr ".tgi[0].ni[21].y" 6862.85400390625;
+	setAttr ".tgi[0].ni[20].x" 30974.806640625;
+	setAttr ".tgi[0].ni[20].y" 6497.51513671875;
+	setAttr ".tgi[0].ni[20].nvs" 18309;
+	setAttr ".tgi[0].ni[21].x" 32726.84375;
+	setAttr ".tgi[0].ni[21].y" 7406.84326171875;
 	setAttr ".tgi[0].ni[21].nvs" 18310;
-	setAttr ".tgi[0].ni[22].x" 35037.85546875;
-	setAttr ".tgi[0].ni[22].y" 7297.392578125;
+	setAttr ".tgi[0].ni[22].x" 35029.828125;
+	setAttr ".tgi[0].ni[22].y" 7077.86328125;
 	setAttr ".tgi[0].ni[22].nvs" 18308;
-	setAttr ".tgi[0].ni[23].x" 35014.87109375;
-	setAttr ".tgi[0].ni[23].y" 6610.3515625;
-	setAttr ".tgi[0].ni[23].nvs" 18308;
-	setAttr ".tgi[0].ni[24].x" 35033.0390625;
-	setAttr ".tgi[0].ni[24].y" 7456.74462890625;
-	setAttr ".tgi[0].ni[24].nvs" 18308;
-	setAttr ".tgi[0].ni[25].x" 33947.75;
-	setAttr ".tgi[0].ni[25].y" 7320.33203125;
+	setAttr ".tgi[0].ni[23].x" 30673.091796875;
+	setAttr ".tgi[0].ni[23].y" 6467.63427734375;
+	setAttr ".tgi[0].ni[23].nvs" 18309;
+	setAttr ".tgi[0].ni[24].x" 33321.2109375;
+	setAttr ".tgi[0].ni[24].y" 8297.2705078125;
+	setAttr ".tgi[0].ni[24].nvs" 18310;
+	setAttr ".tgi[0].ni[25].x" 35037.85546875;
+	setAttr ".tgi[0].ni[25].y" 7297.392578125;
 	setAttr ".tgi[0].ni[25].nvs" 18308;
-	setAttr ".tgi[0].ni[26].x" 33960.36328125;
-	setAttr ".tgi[0].ni[26].y" 6522.1943359375;
+	setAttr ".tgi[0].ni[26].x" 34417.93359375;
+	setAttr ".tgi[0].ni[26].y" 6300.25341796875;
 	setAttr ".tgi[0].ni[26].nvs" 18308;
-	setAttr ".tgi[0].ni[27].x" 33957.4140625;
-	setAttr ".tgi[0].ni[27].y" 6817.36767578125;
+	setAttr ".tgi[0].ni[27].x" 34495.8046875;
+	setAttr ".tgi[0].ni[27].y" 7917.4130859375;
 	setAttr ".tgi[0].ni[27].nvs" 18308;
-	setAttr ".tgi[0].ni[28].x" 35029.828125;
-	setAttr ".tgi[0].ni[28].y" 7077.86328125;
-	setAttr ".tgi[0].ni[28].nvs" 18308;
-	setAttr ".tgi[0].ni[29].x" 35009.1953125;
-	setAttr ".tgi[0].ni[29].y" 6919.349609375;
+	setAttr ".tgi[0].ni[28].x" 31625.728515625;
+	setAttr ".tgi[0].ni[28].y" 6862.85400390625;
+	setAttr ".tgi[0].ni[28].nvs" 18310;
+	setAttr ".tgi[0].ni[29].x" 35033.0390625;
+	setAttr ".tgi[0].ni[29].y" 7686.74462890625;
 	setAttr ".tgi[0].ni[29].nvs" 18308;
-	setAttr ".tgi[0].ni[30].x" 35033.0390625;
-	setAttr ".tgi[0].ni[30].y" 7686.74462890625;
-	setAttr ".tgi[0].ni[30].nvs" 18308;
-	setAttr ".tgi[0].ni[31].x" 31239.884765625;
-	setAttr ".tgi[0].ni[31].y" 6803.005859375;
-	setAttr ".tgi[0].ni[31].nvs" 18310;
-	setAttr ".tgi[0].ni[32].x" 32726.84375;
-	setAttr ".tgi[0].ni[32].y" 7406.84326171875;
-	setAttr ".tgi[0].ni[32].nvs" 18310;
-	setAttr ".tgi[0].ni[33].x" 35023.95703125;
-	setAttr ".tgi[0].ni[33].y" 6296.8125;
+	setAttr ".tgi[0].ni[30].x" 32367.814453125;
+	setAttr ".tgi[0].ni[30].y" 6753.09130859375;
+	setAttr ".tgi[0].ni[30].nvs" 18310;
+	setAttr ".tgi[0].ni[31].x" 34461.15234375;
+	setAttr ".tgi[0].ni[31].y" 7690.9443359375;
+	setAttr ".tgi[0].ni[31].nvs" 18308;
+	setAttr ".tgi[0].ni[32].x" 33958.8828125;
+	setAttr ".tgi[0].ni[32].y" 7486.81884765625;
+	setAttr ".tgi[0].ni[32].nvs" 18308;
+	setAttr ".tgi[0].ni[33].x" 35009.1953125;
+	setAttr ".tgi[0].ni[33].y" 6919.349609375;
 	setAttr ".tgi[0].ni[33].nvs" 18308;
-	setAttr ".tgi[0].ni[34].x" 33315.7734375;
-	setAttr ".tgi[0].ni[34].y" 7209.767578125;
-	setAttr ".tgi[0].ni[34].nvs" 18310;
+	setAttr ".tgi[0].ni[34].x" 33957.4140625;
+	setAttr ".tgi[0].ni[34].y" 6817.36767578125;
+	setAttr ".tgi[0].ni[34].nvs" 18308;
 	setAttr ".tgi[0].ni[35].x" 34749.98046875;
 	setAttr ".tgi[0].ni[35].y" 6481.5419921875;
 	setAttr ".tgi[0].ni[35].nvs" 18308;
-	setAttr ".tgi[0].ni[36].x" 35021.36328125;
-	setAttr ".tgi[0].ni[36].y" 6151.1494140625;
+	setAttr ".tgi[0].ni[36].x" 34440.9453125;
+	setAttr ".tgi[0].ni[36].y" 6801.91259765625;
 	setAttr ".tgi[0].ni[36].nvs" 18308;
-	setAttr ".tgi[0].ni[37].x" 34733.5703125;
-	setAttr ".tgi[0].ni[37].y" 7918.91943359375;
+	setAttr ".tgi[0].ni[37].x" 33947.75;
+	setAttr ".tgi[0].ni[37].y" 7320.33203125;
 	setAttr ".tgi[0].ni[37].nvs" 18308;
-	setAttr ".tgi[0].ni[38].x" 35018.5859375;
-	setAttr ".tgi[0].ni[38].y" 6457.45703125;
+	setAttr ".tgi[0].ni[38].x" 34727.5;
+	setAttr ".tgi[0].ni[38].y" 7689.9560546875;
 	setAttr ".tgi[0].ni[38].nvs" 18308;
-	setAttr ".tgi[0].ni[39].x" 30673.091796875;
-	setAttr ".tgi[0].ni[39].y" 6467.63427734375;
-	setAttr ".tgi[0].ni[39].nvs" 18309;
-	setAttr ".tgi[0].ni[40].x" 30974.806640625;
-	setAttr ".tgi[0].ni[40].y" 6497.51513671875;
-	setAttr ".tgi[0].ni[40].nvs" 18309;
-	setAttr ".tgi[0].ni[41].x" 34003.4609375;
-	setAttr ".tgi[0].ni[41].y" 8089.6025390625;
-	setAttr ".tgi[0].ni[41].nvs" 18310;
-	setAttr ".tgi[0].ni[42].x" 31904.376953125;
-	setAttr ".tgi[0].ni[42].y" 6627.072265625;
-	setAttr ".tgi[0].ni[42].nvs" 18309;
-	setAttr ".tgi[0].ni[43].x" 33954.82421875;
-	setAttr ".tgi[0].ni[43].y" 6135.48876953125;
+	setAttr ".tgi[0].ni[39].x" 35033.0390625;
+	setAttr ".tgi[0].ni[39].y" 7456.74462890625;
+	setAttr ".tgi[0].ni[39].nvs" 18308;
+	setAttr ".tgi[0].ni[40].x" 34739.14453125;
+	setAttr ".tgi[0].ni[40].y" 6924.900390625;
+	setAttr ".tgi[0].ni[40].nvs" 18308;
+	setAttr ".tgi[0].ni[41].x" 33955.140625;
+	setAttr ".tgi[0].ni[41].y" 6332.59130859375;
+	setAttr ".tgi[0].ni[41].nvs" 18308;
+	setAttr ".tgi[0].ni[42].x" 34464.98046875;
+	setAttr ".tgi[0].ni[42].y" 7508.67822265625;
+	setAttr ".tgi[0].ni[42].nvs" 18308;
+	setAttr ".tgi[0].ni[43].x" 33960.36328125;
+	setAttr ".tgi[0].ni[43].y" 6522.1943359375;
 	setAttr ".tgi[0].ni[43].nvs" 18308;
-	setAttr ".tgi[0].ni[44].x" 34751.328125;
-	setAttr ".tgi[0].ni[44].y" 6307.5830078125;
+	setAttr ".tgi[0].ni[44].x" 34455.26171875;
+	setAttr ".tgi[0].ni[44].y" 7320.53125;
 	setAttr ".tgi[0].ni[44].nvs" 18308;
-	setAttr ".tgi[0].ni[45].x" 34757.9609375;
-	setAttr ".tgi[0].ni[45].y" 7120.1806640625;
-	setAttr ".tgi[0].ni[45].nvs" 18308;
-	setAttr ".tgi[0].ni[46].x" 32831.28515625;
-	setAttr ".tgi[0].ni[46].y" 7085.54150390625;
-	setAttr ".tgi[0].ni[46].nvs" 18310;
-	setAttr ".tgi[0].ni[47].x" 34741.7890625;
-	setAttr ".tgi[0].ni[47].y" 6789.2607421875;
+	setAttr ".tgi[0].ni[45].x" 31239.884765625;
+	setAttr ".tgi[0].ni[45].y" 6803.005859375;
+	setAttr ".tgi[0].ni[45].nvs" 18310;
+	setAttr ".tgi[0].ni[46].x" 35018.5859375;
+	setAttr ".tgi[0].ni[46].y" 6457.45703125;
+	setAttr ".tgi[0].ni[46].nvs" 18308;
+	setAttr ".tgi[0].ni[47].x" 33956.27734375;
+	setAttr ".tgi[0].ni[47].y" 6672.51904296875;
 	setAttr ".tgi[0].ni[47].nvs" 18308;
-	setAttr ".tgi[0].ni[48].x" 33956.27734375;
-	setAttr ".tgi[0].ni[48].y" 6672.51904296875;
+	setAttr ".tgi[0].ni[48].x" 34757.9609375;
+	setAttr ".tgi[0].ni[48].y" 7120.1806640625;
 	setAttr ".tgi[0].ni[48].nvs" 18308;
-	setAttr ".tgi[0].ni[49].x" 33955.140625;
-	setAttr ".tgi[0].ni[49].y" 6332.59130859375;
+	setAttr ".tgi[0].ni[49].x" 34441.984375;
+	setAttr ".tgi[0].ni[49].y" 6641.556640625;
 	setAttr ".tgi[0].ni[49].nvs" 18308;
-	setAttr ".tgi[0].ni[50].x" 33958.8828125;
-	setAttr ".tgi[0].ni[50].y" 7486.81884765625;
+	setAttr ".tgi[0].ni[50].x" 34733.921875;
+	setAttr ".tgi[0].ni[50].y" 7503.30810546875;
 	setAttr ".tgi[0].ni[50].nvs" 18308;
-	setAttr ".tgi[0].ni[51].x" 35009.1953125;
-	setAttr ".tgi[0].ni[51].y" 6768.82421875;
-	setAttr ".tgi[0].ni[51].nvs" 18308;
-	setAttr ".tgi[0].ni[52].x" 35040.71484375;
-	setAttr ".tgi[0].ni[52].y" 7918.91943359375;
+	setAttr ".tgi[0].ni[51].x" 33699.86328125;
+	setAttr ".tgi[0].ni[51].y" 6814.3408203125;
+	setAttr ".tgi[0].ni[51].nvs" 18306;
+	setAttr ".tgi[0].ni[52].x" 34751.328125;
+	setAttr ".tgi[0].ni[52].y" 6307.5830078125;
 	setAttr ".tgi[0].ni[52].nvs" 18308;
-	setAttr ".tgi[0].ni[53].x" 34733.921875;
-	setAttr ".tgi[0].ni[53].y" 7503.30810546875;
+	setAttr ".tgi[0].ni[53].x" 34721.03515625;
+	setAttr ".tgi[0].ni[53].y" 6146.60791015625;
 	setAttr ".tgi[0].ni[53].nvs" 18308;
-	setAttr ".tgi[0].ni[54].x" 34739.14453125;
-	setAttr ".tgi[0].ni[54].y" 6924.900390625;
-	setAttr ".tgi[0].ni[54].nvs" 18308;
-	setAttr ".tgi[0].ni[55].x" 33959.1796875;
-	setAttr ".tgi[0].ni[55].y" 7696.0791015625;
-	setAttr ".tgi[0].ni[55].nvs" 18308;
-	setAttr ".tgi[0].ni[56].x" 34416.7421875;
-	setAttr ".tgi[0].ni[56].y" 6480.1953125;
-	setAttr ".tgi[0].ni[56].nvs" 18308;
-	setAttr ".tgi[0].ni[57].x" 34440.9453125;
-	setAttr ".tgi[0].ni[57].y" 6801.91259765625;
-	setAttr ".tgi[0].ni[57].nvs" 18308;
-	setAttr ".tgi[0].ni[58].x" 34464.98046875;
-	setAttr ".tgi[0].ni[58].y" 7508.67822265625;
-	setAttr ".tgi[0].ni[58].nvs" 18308;
-	setAttr ".tgi[0].ni[59].x" 34455.26171875;
-	setAttr ".tgi[0].ni[59].y" 7320.53125;
-	setAttr ".tgi[0].ni[59].nvs" 18308;
-	setAttr ".tgi[0].ni[60].x" 34495.8046875;
-	setAttr ".tgi[0].ni[60].y" 7917.4130859375;
-	setAttr ".tgi[0].ni[60].nvs" 18308;
-	setAttr ".tgi[0].ni[61].x" 34461.15234375;
-	setAttr ".tgi[0].ni[61].y" 7690.9443359375;
-	setAttr ".tgi[0].ni[61].nvs" 18308;
-	setAttr ".tgi[0].ni[62].x" 34451.08984375;
-	setAttr ".tgi[0].ni[62].y" 7146.3330078125;
-	setAttr ".tgi[0].ni[62].nvs" 18308;
-	setAttr ".tgi[0].ni[63].x" 34441.984375;
-	setAttr ".tgi[0].ni[63].y" 6641.556640625;
-	setAttr ".tgi[0].ni[63].nvs" 18308;
-	setAttr ".tgi[0].ni[64].x" 34455.01953125;
-	setAttr ".tgi[0].ni[64].y" 6964.34619140625;
-	setAttr ".tgi[0].ni[64].nvs" 18308;
-	setAttr ".tgi[0].ni[65].x" 34417.93359375;
-	setAttr ".tgi[0].ni[65].y" 6300.25341796875;
-	setAttr ".tgi[0].ni[65].nvs" 18308;
-	setAttr ".tgi[0].ni[66].x" 34412.2890625;
-	setAttr ".tgi[0].ni[66].y" 6144.99853515625;
-	setAttr ".tgi[0].ni[66].nvs" 18308;
 select -ne :time1;
 	setAttr ".o" 83;
 	setAttr ".unw" 83;
@@ -4787,31 +4751,123 @@ select -ne :hardwareRenderGlobals;
 	setAttr ".btrs" 512;
 select -ne :ikSystem;
 	setAttr -s 4 ".sol";
-connectAttr "MotionPath_01.ac" "MotionPath_Loc_01.t";
-connectAttr "MotionPath_01.r" "MotionPath_Loc_01.r";
-connectAttr "MotionPath_02.r" "MotionPath_Loc_02.r";
-connectAttr "MotionPath_02.ac" "MotionPath_Loc_02.t";
-connectAttr "MotionPath_03.r" "MotionPath_Loc_03.r";
-connectAttr "MotionPath_03.ac" "MotionPath_Loc_03.t";
-connectAttr "MotionPath_04.r" "MotionPath_Loc_04.r";
-connectAttr "MotionPath_04.ac" "MotionPath_Loc_04.t";
-connectAttr "MotionPath_05.r" "MotionPath_Loc_05.r";
-connectAttr "MotionPath_05.ac" "MotionPath_Loc_05.t";
-connectAttr "MotionPath_06.r" "MotionPath_Loc_06.r";
-connectAttr "MotionPath_06.ac" "MotionPath_Loc_06.t";
-connectAttr "MotionPath_07.r" "MotionPath_Loc_07.r";
-connectAttr "MotionPath_07.ac" "MotionPath_Loc_07.t";
-connectAttr "MotionPath_08.r" "MotionPath_Loc_08.r";
-connectAttr "MotionPath_08.ac" "MotionPath_Loc_08.t";
-connectAttr "MotionPath_09.r" "MotionPath_Loc_09.r";
-connectAttr "MotionPath_09.ac" "MotionPath_Loc_09.t";
-connectAttr "MotionPath_010.r" "MotionPath_Loc_010.r";
-connectAttr "MotionPath_010.ac" "MotionPath_Loc_010.t";
-connectAttr "MotionPath_011.rx" "MotionPath_Loc_011.rx";
-connectAttr "MotionPath_011.ry" "MotionPath_Loc_011.ry";
-connectAttr "MotionPath_011.rz" "MotionPath_Loc_011.rz";
-connectAttr "MotionPath_011.ac" "MotionPath_Loc_011.t";
-connectAttr "MotionPath_011.ro" "MotionPath_Loc_011.ro";
+connectAttr "MotionPath_jnt_01_scaleConstraint1.csx" "MotionPath_jnt_01.sx";
+connectAttr "MotionPath_jnt_01_scaleConstraint1.csy" "MotionPath_jnt_01.sy";
+connectAttr "MotionPath_jnt_01_scaleConstraint1.csz" "MotionPath_jnt_01.sz";
+connectAttr "MotionPath_jnt_01_parentConstraint1.ctx" "MotionPath_jnt_01.tx";
+connectAttr "MotionPath_jnt_01_parentConstraint1.cty" "MotionPath_jnt_01.ty";
+connectAttr "MotionPath_jnt_01_parentConstraint1.ctz" "MotionPath_jnt_01.tz";
+connectAttr "MotionPath_jnt_01_parentConstraint1.crx" "MotionPath_jnt_01.rx";
+connectAttr "MotionPath_jnt_01_parentConstraint1.cry" "MotionPath_jnt_01.ry";
+connectAttr "MotionPath_jnt_01_parentConstraint1.crz" "MotionPath_jnt_01.rz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_01.is";
+connectAttr "MotionPath_jnt_02_scaleConstraint1.csx" "MotionPath_jnt_02.sx";
+connectAttr "MotionPath_jnt_02_scaleConstraint1.csy" "MotionPath_jnt_02.sy";
+connectAttr "MotionPath_jnt_02_scaleConstraint1.csz" "MotionPath_jnt_02.sz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_02.is";
+connectAttr "MotionPath_jnt_02_parentConstraint1.ctx" "MotionPath_jnt_02.tx";
+connectAttr "MotionPath_jnt_02_parentConstraint1.cty" "MotionPath_jnt_02.ty";
+connectAttr "MotionPath_jnt_02_parentConstraint1.ctz" "MotionPath_jnt_02.tz";
+connectAttr "MotionPath_jnt_02_parentConstraint1.crx" "MotionPath_jnt_02.rx";
+connectAttr "MotionPath_jnt_02_parentConstraint1.cry" "MotionPath_jnt_02.ry";
+connectAttr "MotionPath_jnt_02_parentConstraint1.crz" "MotionPath_jnt_02.rz";
+connectAttr "MotionPath_jnt_03_scaleConstraint1.csx" "MotionPath_jnt_03.sx";
+connectAttr "MotionPath_jnt_03_scaleConstraint1.csy" "MotionPath_jnt_03.sy";
+connectAttr "MotionPath_jnt_03_scaleConstraint1.csz" "MotionPath_jnt_03.sz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_03.is";
+connectAttr "MotionPath_jnt_03_parentConstraint1.ctx" "MotionPath_jnt_03.tx";
+connectAttr "MotionPath_jnt_03_parentConstraint1.cty" "MotionPath_jnt_03.ty";
+connectAttr "MotionPath_jnt_03_parentConstraint1.ctz" "MotionPath_jnt_03.tz";
+connectAttr "MotionPath_jnt_03_parentConstraint1.crx" "MotionPath_jnt_03.rx";
+connectAttr "MotionPath_jnt_03_parentConstraint1.cry" "MotionPath_jnt_03.ry";
+connectAttr "MotionPath_jnt_03_parentConstraint1.crz" "MotionPath_jnt_03.rz";
+connectAttr "MotionPath_jnt_04_scaleConstraint1.csx" "MotionPath_jnt_04.sx";
+connectAttr "MotionPath_jnt_04_scaleConstraint1.csy" "MotionPath_jnt_04.sy";
+connectAttr "MotionPath_jnt_04_scaleConstraint1.csz" "MotionPath_jnt_04.sz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_04.is";
+connectAttr "MotionPath_jnt_04_parentConstraint1.ctx" "MotionPath_jnt_04.tx";
+connectAttr "MotionPath_jnt_04_parentConstraint1.cty" "MotionPath_jnt_04.ty";
+connectAttr "MotionPath_jnt_04_parentConstraint1.ctz" "MotionPath_jnt_04.tz";
+connectAttr "MotionPath_jnt_04_parentConstraint1.crx" "MotionPath_jnt_04.rx";
+connectAttr "MotionPath_jnt_04_parentConstraint1.cry" "MotionPath_jnt_04.ry";
+connectAttr "MotionPath_jnt_04_parentConstraint1.crz" "MotionPath_jnt_04.rz";
+connectAttr "MotionPath_jnt_05_scaleConstraint1.csx" "MotionPath_jnt_05.sx";
+connectAttr "MotionPath_jnt_05_scaleConstraint1.csy" "MotionPath_jnt_05.sy";
+connectAttr "MotionPath_jnt_05_scaleConstraint1.csz" "MotionPath_jnt_05.sz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_05.is";
+connectAttr "MotionPath_jnt_05_parentConstraint1.ctx" "MotionPath_jnt_05.tx";
+connectAttr "MotionPath_jnt_05_parentConstraint1.cty" "MotionPath_jnt_05.ty";
+connectAttr "MotionPath_jnt_05_parentConstraint1.ctz" "MotionPath_jnt_05.tz";
+connectAttr "MotionPath_jnt_05_parentConstraint1.crx" "MotionPath_jnt_05.rx";
+connectAttr "MotionPath_jnt_05_parentConstraint1.cry" "MotionPath_jnt_05.ry";
+connectAttr "MotionPath_jnt_05_parentConstraint1.crz" "MotionPath_jnt_05.rz";
+connectAttr "MotionPath_jnt_06_scaleConstraint1.csx" "MotionPath_jnt_06.sx";
+connectAttr "MotionPath_jnt_06_scaleConstraint1.csy" "MotionPath_jnt_06.sy";
+connectAttr "MotionPath_jnt_06_scaleConstraint1.csz" "MotionPath_jnt_06.sz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_06.is";
+connectAttr "MotionPath_jnt_06_parentConstraint1.ctx" "MotionPath_jnt_06.tx";
+connectAttr "MotionPath_jnt_06_parentConstraint1.cty" "MotionPath_jnt_06.ty";
+connectAttr "MotionPath_jnt_06_parentConstraint1.ctz" "MotionPath_jnt_06.tz";
+connectAttr "MotionPath_jnt_06_parentConstraint1.crx" "MotionPath_jnt_06.rx";
+connectAttr "MotionPath_jnt_06_parentConstraint1.cry" "MotionPath_jnt_06.ry";
+connectAttr "MotionPath_jnt_06_parentConstraint1.crz" "MotionPath_jnt_06.rz";
+connectAttr "MotionPath_jnt_07_scaleConstraint1.csx" "MotionPath_jnt_07.sx";
+connectAttr "MotionPath_jnt_07_scaleConstraint1.csy" "MotionPath_jnt_07.sy";
+connectAttr "MotionPath_jnt_07_scaleConstraint1.csz" "MotionPath_jnt_07.sz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_07.is";
+connectAttr "MotionPath_jnt_07_parentConstraint1.ctx" "MotionPath_jnt_07.tx";
+connectAttr "MotionPath_jnt_07_parentConstraint1.cty" "MotionPath_jnt_07.ty";
+connectAttr "MotionPath_jnt_07_parentConstraint1.ctz" "MotionPath_jnt_07.tz";
+connectAttr "MotionPath_jnt_07_parentConstraint1.crx" "MotionPath_jnt_07.rx";
+connectAttr "MotionPath_jnt_07_parentConstraint1.cry" "MotionPath_jnt_07.ry";
+connectAttr "MotionPath_jnt_07_parentConstraint1.crz" "MotionPath_jnt_07.rz";
+connectAttr "MotionPath_jnt_08_scaleConstraint1.csx" "MotionPath_jnt_08.sx";
+connectAttr "MotionPath_jnt_08_scaleConstraint1.csy" "MotionPath_jnt_08.sy";
+connectAttr "MotionPath_jnt_08_scaleConstraint1.csz" "MotionPath_jnt_08.sz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_08.is";
+connectAttr "MotionPath_jnt_08_parentConstraint1.ctx" "MotionPath_jnt_08.tx";
+connectAttr "MotionPath_jnt_08_parentConstraint1.cty" "MotionPath_jnt_08.ty";
+connectAttr "MotionPath_jnt_08_parentConstraint1.ctz" "MotionPath_jnt_08.tz";
+connectAttr "MotionPath_jnt_08_parentConstraint1.crx" "MotionPath_jnt_08.rx";
+connectAttr "MotionPath_jnt_08_parentConstraint1.cry" "MotionPath_jnt_08.ry";
+connectAttr "MotionPath_jnt_08_parentConstraint1.crz" "MotionPath_jnt_08.rz";
+connectAttr "MotionPath_jnt_09_scaleConstraint1.csx" "MotionPath_jnt_09.sx";
+connectAttr "MotionPath_jnt_09_scaleConstraint1.csy" "MotionPath_jnt_09.sy";
+connectAttr "MotionPath_jnt_09_scaleConstraint1.csz" "MotionPath_jnt_09.sz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_09.is";
+connectAttr "MotionPath_jnt_09_parentConstraint1.ctx" "MotionPath_jnt_09.tx";
+connectAttr "MotionPath_jnt_09_parentConstraint1.cty" "MotionPath_jnt_09.ty";
+connectAttr "MotionPath_jnt_09_parentConstraint1.ctz" "MotionPath_jnt_09.tz";
+connectAttr "MotionPath_jnt_09_parentConstraint1.crx" "MotionPath_jnt_09.rx";
+connectAttr "MotionPath_jnt_09_parentConstraint1.cry" "MotionPath_jnt_09.ry";
+connectAttr "MotionPath_jnt_09_parentConstraint1.crz" "MotionPath_jnt_09.rz";
+connectAttr "MotionPath_jnt_010_scaleConstraint1.csx" "MotionPath_jnt_10.sx";
+connectAttr "MotionPath_jnt_010_scaleConstraint1.csy" "MotionPath_jnt_10.sy";
+connectAttr "MotionPath_jnt_010_scaleConstraint1.csz" "MotionPath_jnt_10.sz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_10.is";
+connectAttr "MotionPath_jnt_010_parentConstraint1.ctx" "MotionPath_jnt_10.tx";
+connectAttr "MotionPath_jnt_010_parentConstraint1.cty" "MotionPath_jnt_10.ty";
+connectAttr "MotionPath_jnt_010_parentConstraint1.ctz" "MotionPath_jnt_10.tz";
+connectAttr "MotionPath_jnt_010_parentConstraint1.crx" "MotionPath_jnt_10.rx";
+connectAttr "MotionPath_jnt_010_parentConstraint1.cry" "MotionPath_jnt_10.ry";
+connectAttr "MotionPath_jnt_010_parentConstraint1.crz" "MotionPath_jnt_10.rz";
+connectAttr "MotionPath_jnt_011_scaleConstraint1.csx" "MotionPath_jnt_11.sx";
+connectAttr "MotionPath_jnt_011_scaleConstraint1.csy" "MotionPath_jnt_11.sy";
+connectAttr "MotionPath_jnt_011_scaleConstraint1.csz" "MotionPath_jnt_11.sz";
+connectAttr "MotionPath_jnt_011_parentConstraint1.ctx" "MotionPath_jnt_11.tx";
+connectAttr "MotionPath_jnt_011_parentConstraint1.cty" "MotionPath_jnt_11.ty";
+connectAttr "MotionPath_jnt_011_parentConstraint1.ctz" "MotionPath_jnt_11.tz";
+connectAttr "MotionPath_jnt_011_parentConstraint1.crx" "MotionPath_jnt_11.rx";
+connectAttr "MotionPath_jnt_011_parentConstraint1.cry" "MotionPath_jnt_11.ry";
+connectAttr "MotionPath_jnt_011_parentConstraint1.crz" "MotionPath_jnt_11.rz";
+connectAttr "MotionPath_Root.s" "MotionPath_jnt_11.is";
+connectAttr "skinCluster2GroupId.id" "CylinderShape.iog.og[0].gid";
+connectAttr "skinCluster2Set.mwc" "CylinderShape.iog.og[0].gco";
+connectAttr "groupId4.id" "CylinderShape.iog.og[1].gid";
+connectAttr "tweakSet2.mwc" "CylinderShape.iog.og[1].gco";
+connectAttr "skinCluster2.og[0]" "CylinderShape.i";
+connectAttr "tweak2.vl[0].vt[0]" "CylinderShape.twl";
+connectAttr "polyCylinder1.out" "CylinderShape1Orig.i";
 connectAttr "Form_Ctrl.tz" "Form_Ctrl.Value" -l on;
 connectAttr "pointOnCurveInfo1.p" "Marker.t";
 connectAttr "skinCluster1GroupId.id" "NurbsShape.iog.og[3].gid";
@@ -5130,123 +5186,31 @@ connectAttr "MotionPath_Loc_011.pm" "MotionPath_jnt_011_parentConstraint1.tg[0].
 		;
 connectAttr "MotionPath_jnt_011_parentConstraint1.w0" "MotionPath_jnt_011_parentConstraint1.tg[0].tw"
 		;
-connectAttr "MotionPath_jnt_01_scaleConstraint1.csx" "MotionPath_jnt_01.sx";
-connectAttr "MotionPath_jnt_01_scaleConstraint1.csy" "MotionPath_jnt_01.sy";
-connectAttr "MotionPath_jnt_01_scaleConstraint1.csz" "MotionPath_jnt_01.sz";
-connectAttr "MotionPath_jnt_01_parentConstraint1.ctx" "MotionPath_jnt_01.tx";
-connectAttr "MotionPath_jnt_01_parentConstraint1.cty" "MotionPath_jnt_01.ty";
-connectAttr "MotionPath_jnt_01_parentConstraint1.ctz" "MotionPath_jnt_01.tz";
-connectAttr "MotionPath_jnt_01_parentConstraint1.crx" "MotionPath_jnt_01.rx";
-connectAttr "MotionPath_jnt_01_parentConstraint1.cry" "MotionPath_jnt_01.ry";
-connectAttr "MotionPath_jnt_01_parentConstraint1.crz" "MotionPath_jnt_01.rz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_01.is";
-connectAttr "MotionPath_jnt_02_scaleConstraint1.csx" "MotionPath_jnt_02.sx";
-connectAttr "MotionPath_jnt_02_scaleConstraint1.csy" "MotionPath_jnt_02.sy";
-connectAttr "MotionPath_jnt_02_scaleConstraint1.csz" "MotionPath_jnt_02.sz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_02.is";
-connectAttr "MotionPath_jnt_02_parentConstraint1.ctx" "MotionPath_jnt_02.tx";
-connectAttr "MotionPath_jnt_02_parentConstraint1.cty" "MotionPath_jnt_02.ty";
-connectAttr "MotionPath_jnt_02_parentConstraint1.ctz" "MotionPath_jnt_02.tz";
-connectAttr "MotionPath_jnt_02_parentConstraint1.crx" "MotionPath_jnt_02.rx";
-connectAttr "MotionPath_jnt_02_parentConstraint1.cry" "MotionPath_jnt_02.ry";
-connectAttr "MotionPath_jnt_02_parentConstraint1.crz" "MotionPath_jnt_02.rz";
-connectAttr "MotionPath_jnt_03_scaleConstraint1.csx" "MotionPath_jnt_03.sx";
-connectAttr "MotionPath_jnt_03_scaleConstraint1.csy" "MotionPath_jnt_03.sy";
-connectAttr "MotionPath_jnt_03_scaleConstraint1.csz" "MotionPath_jnt_03.sz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_03.is";
-connectAttr "MotionPath_jnt_03_parentConstraint1.ctx" "MotionPath_jnt_03.tx";
-connectAttr "MotionPath_jnt_03_parentConstraint1.cty" "MotionPath_jnt_03.ty";
-connectAttr "MotionPath_jnt_03_parentConstraint1.ctz" "MotionPath_jnt_03.tz";
-connectAttr "MotionPath_jnt_03_parentConstraint1.crx" "MotionPath_jnt_03.rx";
-connectAttr "MotionPath_jnt_03_parentConstraint1.cry" "MotionPath_jnt_03.ry";
-connectAttr "MotionPath_jnt_03_parentConstraint1.crz" "MotionPath_jnt_03.rz";
-connectAttr "MotionPath_jnt_04_scaleConstraint1.csx" "MotionPath_jnt_04.sx";
-connectAttr "MotionPath_jnt_04_scaleConstraint1.csy" "MotionPath_jnt_04.sy";
-connectAttr "MotionPath_jnt_04_scaleConstraint1.csz" "MotionPath_jnt_04.sz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_04.is";
-connectAttr "MotionPath_jnt_04_parentConstraint1.ctx" "MotionPath_jnt_04.tx";
-connectAttr "MotionPath_jnt_04_parentConstraint1.cty" "MotionPath_jnt_04.ty";
-connectAttr "MotionPath_jnt_04_parentConstraint1.ctz" "MotionPath_jnt_04.tz";
-connectAttr "MotionPath_jnt_04_parentConstraint1.crx" "MotionPath_jnt_04.rx";
-connectAttr "MotionPath_jnt_04_parentConstraint1.cry" "MotionPath_jnt_04.ry";
-connectAttr "MotionPath_jnt_04_parentConstraint1.crz" "MotionPath_jnt_04.rz";
-connectAttr "MotionPath_jnt_05_scaleConstraint1.csx" "MotionPath_jnt_05.sx";
-connectAttr "MotionPath_jnt_05_scaleConstraint1.csy" "MotionPath_jnt_05.sy";
-connectAttr "MotionPath_jnt_05_scaleConstraint1.csz" "MotionPath_jnt_05.sz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_05.is";
-connectAttr "MotionPath_jnt_05_parentConstraint1.ctx" "MotionPath_jnt_05.tx";
-connectAttr "MotionPath_jnt_05_parentConstraint1.cty" "MotionPath_jnt_05.ty";
-connectAttr "MotionPath_jnt_05_parentConstraint1.ctz" "MotionPath_jnt_05.tz";
-connectAttr "MotionPath_jnt_05_parentConstraint1.crx" "MotionPath_jnt_05.rx";
-connectAttr "MotionPath_jnt_05_parentConstraint1.cry" "MotionPath_jnt_05.ry";
-connectAttr "MotionPath_jnt_05_parentConstraint1.crz" "MotionPath_jnt_05.rz";
-connectAttr "MotionPath_jnt_06_scaleConstraint1.csx" "MotionPath_jnt_06.sx";
-connectAttr "MotionPath_jnt_06_scaleConstraint1.csy" "MotionPath_jnt_06.sy";
-connectAttr "MotionPath_jnt_06_scaleConstraint1.csz" "MotionPath_jnt_06.sz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_06.is";
-connectAttr "MotionPath_jnt_06_parentConstraint1.ctx" "MotionPath_jnt_06.tx";
-connectAttr "MotionPath_jnt_06_parentConstraint1.cty" "MotionPath_jnt_06.ty";
-connectAttr "MotionPath_jnt_06_parentConstraint1.ctz" "MotionPath_jnt_06.tz";
-connectAttr "MotionPath_jnt_06_parentConstraint1.crx" "MotionPath_jnt_06.rx";
-connectAttr "MotionPath_jnt_06_parentConstraint1.cry" "MotionPath_jnt_06.ry";
-connectAttr "MotionPath_jnt_06_parentConstraint1.crz" "MotionPath_jnt_06.rz";
-connectAttr "MotionPath_jnt_07_scaleConstraint1.csx" "MotionPath_jnt_07.sx";
-connectAttr "MotionPath_jnt_07_scaleConstraint1.csy" "MotionPath_jnt_07.sy";
-connectAttr "MotionPath_jnt_07_scaleConstraint1.csz" "MotionPath_jnt_07.sz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_07.is";
-connectAttr "MotionPath_jnt_07_parentConstraint1.ctx" "MotionPath_jnt_07.tx";
-connectAttr "MotionPath_jnt_07_parentConstraint1.cty" "MotionPath_jnt_07.ty";
-connectAttr "MotionPath_jnt_07_parentConstraint1.ctz" "MotionPath_jnt_07.tz";
-connectAttr "MotionPath_jnt_07_parentConstraint1.crx" "MotionPath_jnt_07.rx";
-connectAttr "MotionPath_jnt_07_parentConstraint1.cry" "MotionPath_jnt_07.ry";
-connectAttr "MotionPath_jnt_07_parentConstraint1.crz" "MotionPath_jnt_07.rz";
-connectAttr "MotionPath_jnt_08_scaleConstraint1.csx" "MotionPath_jnt_08.sx";
-connectAttr "MotionPath_jnt_08_scaleConstraint1.csy" "MotionPath_jnt_08.sy";
-connectAttr "MotionPath_jnt_08_scaleConstraint1.csz" "MotionPath_jnt_08.sz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_08.is";
-connectAttr "MotionPath_jnt_08_parentConstraint1.ctx" "MotionPath_jnt_08.tx";
-connectAttr "MotionPath_jnt_08_parentConstraint1.cty" "MotionPath_jnt_08.ty";
-connectAttr "MotionPath_jnt_08_parentConstraint1.ctz" "MotionPath_jnt_08.tz";
-connectAttr "MotionPath_jnt_08_parentConstraint1.crx" "MotionPath_jnt_08.rx";
-connectAttr "MotionPath_jnt_08_parentConstraint1.cry" "MotionPath_jnt_08.ry";
-connectAttr "MotionPath_jnt_08_parentConstraint1.crz" "MotionPath_jnt_08.rz";
-connectAttr "MotionPath_jnt_09_scaleConstraint1.csx" "MotionPath_jnt_09.sx";
-connectAttr "MotionPath_jnt_09_scaleConstraint1.csy" "MotionPath_jnt_09.sy";
-connectAttr "MotionPath_jnt_09_scaleConstraint1.csz" "MotionPath_jnt_09.sz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_09.is";
-connectAttr "MotionPath_jnt_09_parentConstraint1.ctx" "MotionPath_jnt_09.tx";
-connectAttr "MotionPath_jnt_09_parentConstraint1.cty" "MotionPath_jnt_09.ty";
-connectAttr "MotionPath_jnt_09_parentConstraint1.ctz" "MotionPath_jnt_09.tz";
-connectAttr "MotionPath_jnt_09_parentConstraint1.crx" "MotionPath_jnt_09.rx";
-connectAttr "MotionPath_jnt_09_parentConstraint1.cry" "MotionPath_jnt_09.ry";
-connectAttr "MotionPath_jnt_09_parentConstraint1.crz" "MotionPath_jnt_09.rz";
-connectAttr "MotionPath_jnt_010_scaleConstraint1.csx" "MotionPath_jnt_10.sx";
-connectAttr "MotionPath_jnt_010_scaleConstraint1.csy" "MotionPath_jnt_10.sy";
-connectAttr "MotionPath_jnt_010_scaleConstraint1.csz" "MotionPath_jnt_10.sz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_10.is";
-connectAttr "MotionPath_jnt_010_parentConstraint1.ctx" "MotionPath_jnt_10.tx";
-connectAttr "MotionPath_jnt_010_parentConstraint1.cty" "MotionPath_jnt_10.ty";
-connectAttr "MotionPath_jnt_010_parentConstraint1.ctz" "MotionPath_jnt_10.tz";
-connectAttr "MotionPath_jnt_010_parentConstraint1.crx" "MotionPath_jnt_10.rx";
-connectAttr "MotionPath_jnt_010_parentConstraint1.cry" "MotionPath_jnt_10.ry";
-connectAttr "MotionPath_jnt_010_parentConstraint1.crz" "MotionPath_jnt_10.rz";
-connectAttr "MotionPath_jnt_011_scaleConstraint1.csx" "MotionPath_jnt_11.sx";
-connectAttr "MotionPath_jnt_011_scaleConstraint1.csy" "MotionPath_jnt_11.sy";
-connectAttr "MotionPath_jnt_011_scaleConstraint1.csz" "MotionPath_jnt_11.sz";
-connectAttr "MotionPath_jnt_011_parentConstraint1.ctx" "MotionPath_jnt_11.tx";
-connectAttr "MotionPath_jnt_011_parentConstraint1.cty" "MotionPath_jnt_11.ty";
-connectAttr "MotionPath_jnt_011_parentConstraint1.ctz" "MotionPath_jnt_11.tz";
-connectAttr "MotionPath_jnt_011_parentConstraint1.crx" "MotionPath_jnt_11.rx";
-connectAttr "MotionPath_jnt_011_parentConstraint1.cry" "MotionPath_jnt_11.ry";
-connectAttr "MotionPath_jnt_011_parentConstraint1.crz" "MotionPath_jnt_11.rz";
-connectAttr "MotionPath_Root.s" "MotionPath_jnt_11.is";
-connectAttr "skinCluster2GroupId.id" "CylinderShape.iog.og[0].gid";
-connectAttr "skinCluster2Set.mwc" "CylinderShape.iog.og[0].gco";
-connectAttr "groupId4.id" "CylinderShape.iog.og[1].gid";
-connectAttr "tweakSet2.mwc" "CylinderShape.iog.og[1].gco";
-connectAttr "skinCluster2.og[0]" "CylinderShape.i";
-connectAttr "tweak2.vl[0].vt[0]" "CylinderShape.twl";
-connectAttr "polyCylinder1.out" "CylinderShape1Orig.i";
+connectAttr "MotionPath_01.ac" "MotionPath_Loc_01.t";
+connectAttr "MotionPath_01.r" "MotionPath_Loc_01.r";
+connectAttr "MotionPath_02.r" "MotionPath_Loc_02.r";
+connectAttr "MotionPath_02.ac" "MotionPath_Loc_02.t";
+connectAttr "MotionPath_03.r" "MotionPath_Loc_03.r";
+connectAttr "MotionPath_03.ac" "MotionPath_Loc_03.t";
+connectAttr "MotionPath_04.r" "MotionPath_Loc_04.r";
+connectAttr "MotionPath_04.ac" "MotionPath_Loc_04.t";
+connectAttr "MotionPath_05.r" "MotionPath_Loc_05.r";
+connectAttr "MotionPath_05.ac" "MotionPath_Loc_05.t";
+connectAttr "MotionPath_06.r" "MotionPath_Loc_06.r";
+connectAttr "MotionPath_06.ac" "MotionPath_Loc_06.t";
+connectAttr "MotionPath_07.r" "MotionPath_Loc_07.r";
+connectAttr "MotionPath_07.ac" "MotionPath_Loc_07.t";
+connectAttr "MotionPath_08.r" "MotionPath_Loc_08.r";
+connectAttr "MotionPath_08.ac" "MotionPath_Loc_08.t";
+connectAttr "MotionPath_09.r" "MotionPath_Loc_09.r";
+connectAttr "MotionPath_09.ac" "MotionPath_Loc_09.t";
+connectAttr "MotionPath_010.r" "MotionPath_Loc_010.r";
+connectAttr "MotionPath_010.ac" "MotionPath_Loc_010.t";
+connectAttr "MotionPath_011.rx" "MotionPath_Loc_011.rx";
+connectAttr "MotionPath_011.ry" "MotionPath_Loc_011.ry";
+connectAttr "MotionPath_011.rz" "MotionPath_Loc_011.rz";
+connectAttr "MotionPath_011.ac" "MotionPath_Loc_011.t";
+connectAttr "MotionPath_011.ro" "MotionPath_Loc_011.ro";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
@@ -5601,123 +5565,98 @@ connectAttr "Calculate_Distance11.o" "Uvalue_Limit_011.cf";
 connectAttr "Form_Ctrl.StratchMode" "floatCondition1._cnd";
 connectAttr "StrecthMode_Condition.ocr" "floatCondition1._fa";
 connectAttr "Calculate_Stretch_Rate.ox" "floatCondition1._fb";
-connectAttr "StartInclude_Calc_02.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[0].dn"
+connectAttr "StrecthMode_Condition.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[0].dn"
 		;
-connectAttr "StartInclude_Calc_03.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[2].dn"
+connectAttr "MotionPath_Loc_01.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[1].dn"
 		;
-connectAttr "StartInclude_Calc_04.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[3].dn"
+connectAttr "MotionPath_07.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[2].dn";
+connectAttr "MotionPath_Loc_07.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[3].dn"
 		;
-connectAttr "StartInclude_Calc_010.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[4].dn"
+connectAttr "Uvalue_Limit_09.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[4].dn";
+connectAttr "MotionPath_Loc_011.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[5].dn"
 		;
-connectAttr "StartInclude_Calc_01.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[5].dn"
+connectAttr "MotionPath_01.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[6].dn";
+connectAttr "Calculate_Distance02.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[7].dn"
 		;
-connectAttr "StartInclude_Calc_05.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[6].dn"
+connectAttr "Calculate_Stretch_NormalizeUnit.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[8].dn"
 		;
-connectAttr "StartInclude_Calc_011.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[7].dn"
+connectAttr "MotionPath_08.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[9].dn";
+connectAttr "Calculate_Distance05.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[10].dn"
 		;
-connectAttr "StartInclude_Calc_06.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[8].dn"
+connectAttr "MotionPath_04.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[11].dn";
+connectAttr "MotionPath_Loc_08.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[12].dn"
 		;
-connectAttr "StartInclude_Calc_07.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[9].dn"
+connectAttr "MotionPath_Loc_010.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[13].dn"
 		;
-connectAttr "StartInclude_Calc_08.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[10].dn"
+connectAttr "curveInfo1.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[14].dn";
+connectAttr "Calculate_Distance11.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[15].dn"
 		;
-connectAttr "StartInclude_Calc_09.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[11].dn"
+connectAttr "Calculate_Distance01.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[16].dn"
 		;
-connectAttr "floatCondition1.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[12].dn"
+connectAttr "Uvalue_Limit_06.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[17].dn"
 		;
-connectAttr "MotionPath_08.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[13].dn";
-connectAttr "Calculate_Distance06.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[14].dn"
+connectAttr "Calculate_Distance06.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[18].dn"
 		;
-connectAttr "Calculate_Distance05.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[15].dn"
+connectAttr "Uvalue_Limit_05.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[19].dn"
 		;
-connectAttr "Calculate_Stretch_Rate.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[16].dn"
+connectAttr "curveFromSurfaceIso1.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[20].dn"
 		;
-connectAttr "MotionPath_011.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[17].dn";
-connectAttr "Form_Ctrl.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[18].dn";
-connectAttr "MotionPath_04.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[19].dn";
-connectAttr "MotionPath_02.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[20].dn";
-connectAttr "NurbsCurveShape.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[21].dn"
+connectAttr "None_Stretch_Mode.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[21].dn"
 		;
-connectAttr "MotionPath_Loc_04.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[22].dn"
+connectAttr "MotionPath_Loc_05.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[22].dn"
 		;
-connectAttr "MotionPath_Loc_08.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[23].dn"
+connectAttr "NurbsShape.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[23].dn";
+connectAttr "Form_Ctrl.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[24].dn";
+connectAttr "MotionPath_Loc_04.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[25].dn"
 		;
-connectAttr "MotionPath_Loc_03.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[24].dn"
+connectAttr "Uvalue_Limit_010.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[26].dn"
 		;
-connectAttr "Calculate_Distance04.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[25].dn"
+connectAttr "Uvalue_Limit_01.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[27].dn"
 		;
-connectAttr "Calculate_Distance09.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[26].dn"
+connectAttr "NurbsCurveShape.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[28].dn"
 		;
-connectAttr "Calculate_Distance07.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[27].dn"
+connectAttr "MotionPath_Loc_02.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[29].dn"
 		;
-connectAttr "MotionPath_Loc_05.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[28].dn"
+connectAttr "Calculate_Stretch_Rate.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[30].dn"
 		;
-connectAttr "MotionPath_Loc_06.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[29].dn"
+connectAttr "Uvalue_Limit_02.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[31].dn"
 		;
-connectAttr "MotionPath_Loc_02.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[30].dn"
+connectAttr "Calculate_Distance03.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[32].dn"
 		;
-connectAttr "rebuildCurve1.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[31].dn";
-connectAttr "None_Stretch_Mode.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[32].dn"
+connectAttr "MotionPath_Loc_06.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[33].dn"
 		;
-connectAttr "MotionPath_Loc_010.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[33].dn"
-		;
-connectAttr "StrecthMode_Condition.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[34].dn"
+connectAttr "Calculate_Distance07.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[34].dn"
 		;
 connectAttr "MotionPath_09.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[35].dn";
-connectAttr "MotionPath_Loc_011.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[36].dn"
+connectAttr "Uvalue_Limit_07.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[36].dn"
 		;
-connectAttr "MotionPath_01.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[37].dn";
-connectAttr "MotionPath_Loc_09.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[38].dn"
+connectAttr "Calculate_Distance04.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[37].dn"
 		;
-connectAttr "NurbsShape.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[39].dn";
-connectAttr "curveFromSurfaceIso1.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[40].dn"
+connectAttr "MotionPath_02.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[38].dn";
+connectAttr "MotionPath_Loc_03.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[39].dn"
 		;
-connectAttr "Calculate_Distance01.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[41].dn"
+connectAttr "MotionPath_06.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[40].dn";
+connectAttr "Calculate_Distance10.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[41].dn"
 		;
-connectAttr "curveInfo1.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[42].dn";
-connectAttr "Calculate_Distance11.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[43].dn"
+connectAttr "Uvalue_Limit_03.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[42].dn"
 		;
-connectAttr "MotionPath_010.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[44].dn";
-connectAttr "MotionPath_05.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[45].dn";
-connectAttr "Calculate_Stretch_NormalizeUnit.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[46].dn"
+connectAttr "Calculate_Distance09.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[43].dn"
 		;
-connectAttr "MotionPath_07.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[47].dn";
-connectAttr "Calculate_Distance08.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[48].dn"
+connectAttr "Uvalue_Limit_04.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[44].dn"
 		;
-connectAttr "Calculate_Distance10.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[49].dn"
+connectAttr "rebuildCurve1.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[45].dn";
+connectAttr "MotionPath_Loc_09.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[46].dn"
 		;
-connectAttr "Calculate_Distance03.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[50].dn"
+connectAttr "Calculate_Distance08.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[47].dn"
 		;
-connectAttr "MotionPath_Loc_07.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[51].dn"
+connectAttr "MotionPath_05.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[48].dn";
+connectAttr "Uvalue_Limit_08.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[49].dn"
 		;
-connectAttr "MotionPath_Loc_01.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[52].dn"
+connectAttr "MotionPath_03.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[50].dn";
+connectAttr "floatCondition1.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[51].dn"
 		;
-connectAttr "MotionPath_03.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[53].dn";
-connectAttr "MotionPath_06.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[54].dn";
-connectAttr "Calculate_Distance02.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[55].dn"
-		;
-connectAttr "Uvalue_Limit_09.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[56].dn"
-		;
-connectAttr "Uvalue_Limit_07.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[57].dn"
-		;
-connectAttr "Uvalue_Limit_03.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[58].dn"
-		;
-connectAttr "Uvalue_Limit_04.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[59].dn"
-		;
-connectAttr "Uvalue_Limit_01.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[60].dn"
-		;
-connectAttr "Uvalue_Limit_02.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[61].dn"
-		;
-connectAttr "Uvalue_Limit_05.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[62].dn"
-		;
-connectAttr "Uvalue_Limit_08.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[63].dn"
-		;
-connectAttr "Uvalue_Limit_06.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[64].dn"
-		;
-connectAttr "Uvalue_Limit_010.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[65].dn"
-		;
-connectAttr "Uvalue_Limit_011.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[66].dn"
-		;
+connectAttr "MotionPath_010.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[52].dn";
+connectAttr "MotionPath_011.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[53].dn";
 connectAttr "plusMinusAverage1.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "multiplyDivide1.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "Calculate_Distance01.msg" ":defaultRenderUtilityList1.u" -na;
