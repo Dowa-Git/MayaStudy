@@ -1,6 +1,6 @@
 //Maya ASCII 2018ff09 scene
 //Name: Week_05_MotionPath.ma
-//Last modified: Thu, Jul 21, 2022 02:48:02 AM
+//Last modified: Thu, Jul 21, 2022 02:48:32 AM
 //Codeset: 949
 requires maya "2018ff09";
 requires -nodeType "floatCondition" "lookdevKit" "1.0";
@@ -15,8 +15,8 @@ fileInfo "osv" "Microsoft Windows 8 Business Edition, 64-bit  (Build 9200)\n";
 createNode transform -s -n "persp";
 	rename -uid "9635457D-4511-3A12-CC15-A1A444BF354C";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 23.684262253880682 48.973856195899231 37.476696602815224 ;
-	setAttr ".r" -type "double3" -47.138352724125504 -1046.1999999998268 -3.8274538202229349e-15 ;
+	setAttr ".t" -type "double3" 53.255943332467808 30.442260023942907 23.093658376823736 ;
+	setAttr ".r" -type "double3" -27.338352724127148 -1013.3999999998191 8.0084894229277967e-15 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "6780195C-4789-EF7A-C55E-7BAF52A6CEEA";
 	setAttr -k off ".v" no;
